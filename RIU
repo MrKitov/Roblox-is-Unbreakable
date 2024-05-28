@@ -1,0 +1,200 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+
+local Window = Library.CreateLib("RIU/Kitov", "RJTheme3")
+
+local Tab = Window:NewTab("Base")
+
+local Section = Tab:NewSection("Хз")
+
+
+Section:NewSlider("ВрумВрум", "Увеличивает Скорость", 150, 0, function(a)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
+end)
+
+
+Section:NewSlider("Бабах", "Увеличивает Прыжок", 150, 0, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+
+Section:NewToggle("Ты набегался", "Нажми 2 раза", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
+    else
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 10
+    end
+end)
+
+
+Section:NewToggle("Ты напрыгался", "Нажми 2 раза", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    else
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 45
+    end
+end)
+
+local Section = Tab:NewSection("Убей Себя")
+
+Section:NewButton("Kill Yourself!", "Kill Yourself", function()
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+end)
+
+
+local Tab = Window:NewTab("Teleports")
+
+local Section = Tab:NewSection("NPC")
+
+Section:NewButton("Black Market Dealer", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(961.186218, 24.3751392, 299.637421, 0.849484622, -0, -0.527613401, 0, 1, -0, 0.527613401, 0, 0.849484622)
+end)
+
+Section:NewButton("Whitesnake (NPC)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-195.417557, 24.7256165, -143.897354, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+end)
+
+Section:NewButton("Homeless Man", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5.95458984, 24.2649536, 13.8969231, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+Section:NewButton("Giorno Giovanna", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-622.688965, 24.2678757, 907.521545, 0.385082781, -0, -0.922882199, 0, 1, -0, 0.922882199, 0, 0.385082781)
+end)
+
+Section:NewButton("Koichi Hirose", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-163.42955, 23.9578857, -0.280304074, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+Section:NewButton("Giorno Giovanna (Diavolo)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1231.89038, 24.2678757, 160.085968, 0.0845634937, 0, 0.996418059, 0, 1, 0, -0.996418059, 0, 0.0845634937)
+end)
+
+Section:NewButton("Denqa", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-100.5839, 54.2381821, 380.381744, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+Section:NewButton("Des", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(279.619995, 199.384689, 729.911682, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+end)
+
+Section:NewButton("Giorno Giovanna (Train Station)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(642.139771, 198.618851, 738.222412, -0.807768345, 0, 0.58950001, 0, 1, 0, -0.58950001, 0, -0.807768345)
+end)
+
+Section:NewButton("Bruno Bucciarati", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-612.4151, 24.0943012, 436.936768, -0.379902959, 0, -0.925026655, 0, 1, 0, 0.925026655, 0, -0.379902959)
+end)
+
+Section:NewButton("Guido Mista", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-562.677246, 24.3139725, 680.420776, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+Section:NewButton("Leone Abbachio", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(833.280334, 53.847393, 385.698029, -0.390146017, 0, -0.920752943, 0, 1, 0, 0.920752943, 0, -0.390146017)
+end)
+
+Section:NewButton("Taxi Driver (Park)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1086.38354, 53.8252449, 438.95462, -0.997075438, 0, 0.0764253661, 0, 1, 0, -0.0764253661, 0, -0.997075438)
+end)
+
+Section:NewButton("Taxi Driver (Castel dell'Ovo)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(79.6578903, 23.9822178, -27.4605103, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+Section:NewButton("Taxi Driver (City Center)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352.911041, 24.0752354, 569.597168, -0.997193336, 0, -0.0748749226, 0, 1, 0, 0.0748749226, 0, -0.997193336)
+end)
+
+Section:NewButton("Taxi Driver (Train Station)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(427.353149, 199.073868, 873.955994, -0.958187938, 0, -0.286139995, 0, 1, 0, 0.286139995, 0, -0.958187938)
+end)
+
+Section:NewButton("Doppio", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-466.312866, 167.417923, 1249.09766, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+Section:NewButton("Djudjo", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-606.201355, 24.2135773, 497.062439, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+Section:NewButton("Whitesnake #3 (NPC)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-455.395142, 24.725605, 452.586426, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+Section:NewButton("Whitesnake #2 (NPC)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-336.55542, 183.636398, 1329.72119, 0.999827743, 0.0185566675, 0.00030880791, -0.0185592007, 0.999720097, 0.0146721127, -3.64559819e-05, -0.0146753164, 0.999892294)
+end)
+
+Section:NewButton("Whitesnake #4 (NPC)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1016.34125, 24.6786098, 257.999878, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
+end)
+
+Section:NewButton("Daniel J.D'arby", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(181.014725, 199.198456, 760.008667, 0.997943223, -0, -0.0641042665, 0, 1, -0, 0.0641042665, 0, 0.997943223)
+end)
+
+Section:NewButton("Taxi Driver (Cliffside)", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-218.309509, 183.120529, 1276.94043, 0.997160137, 0.000752018765, -0.0753067955, -0.000973193906, 0.999995291, -0.00290033594, 0.0753042623, 0.00296538742, 0.997156203)
+end)
+
+Section:NewButton("Funny Valentine", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(30.0504761, 199.073883, 857.031982, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+Section:NewButton("Eclipse The Clown", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(784.964355, 24.2711945, 290.139282, 0.0845634937, 0, 0.996418059, 0, 1, 0, -0.996418059, 0, 0.0845634937)
+end)
+
+Section:NewButton("Enrico Pucci", "Тп", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-240.01297, 24.3252335, -304.2211, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+local Tab = Window:NewTab("ESP")
+
+local Section = Tab:NewSection("I see you")
+
+Section:NewButton("On ESP", "Делает игроков видимыми", function()
+    local Players = game:GetService("Players"):GetChildren()
+local RunService = game:GetService("RunService")
+local highlight = Instance.new("Highlight")
+highlight.Name = "Highlight"
+
+for i, v in pairs(Players) do
+    repeat wait() until v.Character
+    if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+        local highlightClone = highlight:Clone()
+        highlightClone.Adornee = v.Character
+        highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+        highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        highlightClone.Name = "Highlight"
+    end
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    repeat wait() until player.Character
+    if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+        local highlightClone = highlight:Clone()
+        highlightClone.Adornee = player.Character
+        highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+        highlightClone.Name = "Highlight"
+    end
+end)
+
+game.Players.PlayerRemoving:Connect(function(playerRemoved)
+    playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
+end)
+
+RunService.Heartbeat:Connect(function()
+    for i, v in pairs(Players) do
+        repeat wait() until v.Character
+        if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+            local highlightClone = highlight:Clone()
+            highlightClone.Adornee = v.Character
+            highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+            highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            highlightClone.Name = "Highlight"
+            task.wait()
+        end
+end
+end)
+end)
