@@ -1,200 +1,1061 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = Library.CreateLib("RIU/Kitov", "RJTheme3")
+local Window = OrionLib:MakeWindow({Name = "Riu/Golden Wind v 0.0.0.1", HidePremium = false, SaveConfig = true, ConfigFolder = "Sigma Hub"})
 
-local Tab = Window:NewTab("Base")
+local Tab = Window:MakeTab({
+	Name = "Base",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 
-local Section = Tab:NewSection("Хз")
+local Section = Tab:AddSection({
+	Name = "Хз"
+})
 
+OrionLib:MakeNotification({
+	Name = "Ура!",
+	Content = "Скрипт запущен!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
 
-Section:NewSlider("ВрумВрум", "Увеличивает Скорость", 150, 0, function(a)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
-end)
+Tab:AddButton({
+	Name = "Heal(50$)",
+	Callback = function()
+      		game:GetService("Workspace").NPCs.Friendly.Des.Scripts.QuestHandler.UpdateEvent:FireServer()
+  	end    
+})
 
+Tab:AddButton({
+	Name = "Kill yourself",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+  	end    
+})
 
-Section:NewSlider("Бабах", "Увеличивает Прыжок", 150, 0, function(s)
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
-end)
+local Section = Tab:AddSection({
+	Name = "Инстант"
+})
 
+local amount = 1
 
-Section:NewToggle("Ты набегался", "Нажми 2 раза", function(state)
-    if state then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
-    else
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 10
+-- Создание текстового поля для ввода количества предметов
+Section:AddTextbox({
+    Name = "Сколько купить",
+    Default = "0",
+    TextDisappear = false,
+    Callback = function(Iamount)
+        amount = tonumber(Iamount)
     end
-end)
+})
 
-
-Section:NewToggle("Ты напрыгался", "Нажми 2 раза", function(state)
-    if state then
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
-    else
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 45
-    end
-end)
-
-local Section = Tab:NewSection("Убей Себя")
-
-Section:NewButton("Kill Yourself!", "Kill Yourself", function()
-    game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-end)
-
-
-local Tab = Window:NewTab("Teleports")
-
-local Section = Tab:NewSection("NPC")
-
-Section:NewButton("Black Market Dealer", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(961.186218, 24.3751392, 299.637421, 0.849484622, -0, -0.527613401, 0, 1, -0, 0.527613401, 0, 0.849484622)
-end)
-
-Section:NewButton("Whitesnake (NPC)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-195.417557, 24.7256165, -143.897354, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-end)
-
-Section:NewButton("Homeless Man", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5.95458984, 24.2649536, 13.8969231, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-end)
-
-Section:NewButton("Giorno Giovanna", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-622.688965, 24.2678757, 907.521545, 0.385082781, -0, -0.922882199, 0, 1, -0, 0.922882199, 0, 0.385082781)
-end)
-
-Section:NewButton("Koichi Hirose", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-163.42955, 23.9578857, -0.280304074, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-end)
-
-Section:NewButton("Giorno Giovanna (Diavolo)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1231.89038, 24.2678757, 160.085968, 0.0845634937, 0, 0.996418059, 0, 1, 0, -0.996418059, 0, 0.0845634937)
-end)
-
-Section:NewButton("Denqa", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-100.5839, 54.2381821, 380.381744, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-end)
-
-Section:NewButton("Des", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(279.619995, 199.384689, 729.911682, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-end)
-
-Section:NewButton("Giorno Giovanna (Train Station)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(642.139771, 198.618851, 738.222412, -0.807768345, 0, 0.58950001, 0, 1, 0, -0.58950001, 0, -0.807768345)
-end)
-
-Section:NewButton("Bruno Bucciarati", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-612.4151, 24.0943012, 436.936768, -0.379902959, 0, -0.925026655, 0, 1, 0, 0.925026655, 0, -0.379902959)
-end)
-
-Section:NewButton("Guido Mista", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-562.677246, 24.3139725, 680.420776, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-end)
-
-Section:NewButton("Leone Abbachio", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(833.280334, 53.847393, 385.698029, -0.390146017, 0, -0.920752943, 0, 1, 0, 0.920752943, 0, -0.390146017)
-end)
-
-Section:NewButton("Taxi Driver (Park)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1086.38354, 53.8252449, 438.95462, -0.997075438, 0, 0.0764253661, 0, 1, 0, -0.0764253661, 0, -0.997075438)
-end)
-
-Section:NewButton("Taxi Driver (Castel dell'Ovo)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(79.6578903, 23.9822178, -27.4605103, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-end)
-
-Section:NewButton("Taxi Driver (City Center)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352.911041, 24.0752354, 569.597168, -0.997193336, 0, -0.0748749226, 0, 1, 0, 0.0748749226, 0, -0.997193336)
-end)
-
-Section:NewButton("Taxi Driver (Train Station)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(427.353149, 199.073868, 873.955994, -0.958187938, 0, -0.286139995, 0, 1, 0, 0.286139995, 0, -0.958187938)
-end)
-
-Section:NewButton("Doppio", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-466.312866, 167.417923, 1249.09766, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-end)
-
-Section:NewButton("Djudjo", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-606.201355, 24.2135773, 497.062439, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-end)
-
-Section:NewButton("Whitesnake #3 (NPC)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-455.395142, 24.725605, 452.586426, -1, 0, 0, 0, 1, 0, 0, 0, -1)
-end)
-
-Section:NewButton("Whitesnake #2 (NPC)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-336.55542, 183.636398, 1329.72119, 0.999827743, 0.0185566675, 0.00030880791, -0.0185592007, 0.999720097, 0.0146721127, -3.64559819e-05, -0.0146753164, 0.999892294)
-end)
-
-Section:NewButton("Whitesnake #4 (NPC)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1016.34125, 24.6786098, 257.999878, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
-end)
-
-Section:NewButton("Daniel J.D'arby", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(181.014725, 199.198456, 760.008667, 0.997943223, -0, -0.0641042665, 0, 1, -0, 0.0641042665, 0, 0.997943223)
-end)
-
-Section:NewButton("Taxi Driver (Cliffside)", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-218.309509, 183.120529, 1276.94043, 0.997160137, 0.000752018765, -0.0753067955, -0.000973193906, 0.999995291, -0.00290033594, 0.0753042623, 0.00296538742, 0.997156203)
-end)
-
-Section:NewButton("Funny Valentine", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(30.0504761, 199.073883, 857.031982, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-end)
-
-Section:NewButton("Eclipse The Clown", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(784.964355, 24.2711945, 290.139282, 0.0845634937, 0, 0.996418059, 0, 1, 0, -0.996418059, 0, 0.0845634937)
-end)
-
-Section:NewButton("Enrico Pucci", "Тп", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-240.01297, 24.3252335, -304.2211, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-end)
-
-local Tab = Window:NewTab("ESP")
-
-local Section = Tab:NewSection("I see you")
-
-Section:NewButton("On ESP", "Делает игроков видимыми", function()
-    local Players = game:GetService("Players"):GetChildren()
-local RunService = game:GetService("RunService")
-local highlight = Instance.new("Highlight")
-highlight.Name = "Highlight"
-
-for i, v in pairs(Players) do
-    repeat wait() until v.Character
-    if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
-        local highlightClone = highlight:Clone()
-        highlightClone.Adornee = v.Character
-        highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
-        highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-        highlightClone.Name = "Highlight"
-    end
-end
-
-game.Players.PlayerAdded:Connect(function(player)
-    repeat wait() until player.Character
-    if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
-        local highlightClone = highlight:Clone()
-        highlightClone.Adornee = player.Character
-        highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
-        highlightClone.Name = "Highlight"
-    end
-end)
-
-game.Players.PlayerRemoving:Connect(function(playerRemoved)
-    playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
-end)
-
-RunService.Heartbeat:Connect(function()
-    for i, v in pairs(Players) do
-        repeat wait() until v.Character
-        if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
-            local highlightClone = highlight:Clone()
-            highlightClone.Adornee = v.Character
-            highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
-            highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-            highlightClone.Name = "Highlight"
-            task.wait()
+-- Создание выпадающего меню для выбора предметов и их покупки
+Section:AddDropdown({
+    Name = "Покупка предметов",
+    Default = "",
+    Options = {"Каменная маска(10000$)", "Стальной шар(8000$)", "Стрела(15000$)", "Локакака(100000$)", "Реквием стрела(200000$)"},
+    Callback = function(IBuy)
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        local item
+        if IBuy == "Каменная маска(10000$)" then
+            item = "StoneMask"
+        elseif IBuy == "Стальной шар(8000$)" then
+            item = "SteelBall"
+        elseif IBuy == "Стрела(15000$)" then
+            item = "Arrow"
+        elseif IBuy == "Локакака(100000$)" then
+            item = "Locacaca"
+        elseif IBuy == "Реквием стрела(200000$)" then
+            item = "RequiemArrow"
         end
+        game:GetService("ReplicatedStorage").Events.ItemBuyEvent:FireServer(game:GetService("Workspace"):FindFirstChild(PlayerName), item, amount)
+    end
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "Teleports",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "NPC"
+})
+
+Tab:AddButton({
+	Name = "Black Market Dealer",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(452.373718, 571.122864, -443.966187, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Bruno Bucciarati (Libeccio)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(938.252258, 569.561218, -54.7514076, 0.841714263, 0, 0.539923251, 0, 1, 0, -0.539923251, 0, 0.841714263)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Daniel J. D'arby",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(582.847168, 539.836487, -1579.59546, 0.626903772, -0, -0.779096723, 0, 1, -0, 0.779096723, 0, 0.626903772)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Denqa",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(557.255371, 539.992371, -1605.25574, 0.724315703, -0, -0.689468443, 0, 1, -0, 0.689468443, 0, 0.724315703)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Des",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(631.554077, 571.28772, 84.7146683, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Eclipse The Clown",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(592.147522, 539.698059, -1642.89868, -0.707134247, 0, 0.707079291, 0, 1, 0, -0.707079291, 0, -0.707134247)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Enrico Pucci",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(676.720398, 539.254089, -1860.17468, -0.0370069742, 0, -0.999315083, 0, 1, 0, 0.999315083, 0, -0.0370069742)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Funny Valentine",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(914.547729, 539.825745, -1250.58716, 0.958685577, 0, 0.284467846, 0, 1, 0, -0.284467846, 0, 0.958685577)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Giorno Giovanna (Luca)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(996.971191, 570.930542, 201.939148, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Giorno Giovanna (Luca)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(996.971191, 570.930542, 201.939148, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Giorno Giovanna (Train Station)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(917.421509, 568.552002, -533.935425, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Guido Mista",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(925.38739, 569.621338, -84.0179977, 0.673240185, 0, 0.739423871, 0, 1, 0, -0.739423871, 0, 0.673240185)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Homeless Man",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(955.339111, 539.866516, -1569.02966, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Koichi Hirose",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1070.49146, 570.588013, 461.699402, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Leone Abbachio",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(916.160095, 569.610413, -84.486618, -0.0465669632, 0, -0.998915195, 0, 1, 0, 0.998915195, 0, -0.0465669632)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Mr. X",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(818.718079, 570.525757, -286.464783, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Narancia Ghirga",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(914.033691, 569.535522, -64.828125, -0.673240185, 0, -0.739423871, 0, 1, 0, 0.739423871, 0, -0.673240185)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Pannacotta Fugo",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(921.225708, 569.481873, -64.5294571, -0.539460897, 0, 0.842010558, 0, 1, 0, -0.842010558, 0, -0.539460897)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Polpo",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(489.00946, 541.810425, -1164.80261, -1.53779984e-05, 0.203589082, 0.979056358, -0.00251421332, 0.979053319, -0.203588486, -0.999996781, -0.00246470422, 0.000496804714)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Risotto Nero",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(604.516785, 589.841431, -395.830353, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Castel dell'Ovo)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(689.76886, 539.960083, -1679.34802, 0.614271283, 0, 0.789094925, 0, 1, 0, -0.789094925, 0, 0.614271283)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Fishing Village)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1380.20508, 538.947388, -1753.33545, 0.271317899, 0, 0.962489903, 0, 1, 0, -0.962489903, 0, 0.271317899)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Funicular Station 1)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(761.858582, 539.826965, -1154.87317, 0.0647175908, 0, 0.997903585, 0, 1, 0, -0.997903585, 0, 0.0647175908)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Funicular Station 2)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(794.066162, 570.397034, -426.173523, 0.057264924, -0, -0.998359025, 0, 1, -0, 0.998359025, 0, 0.057264924)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Libeccio)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(985.293518, 570.451843, 59.4648323, 0.0861980319, -0, -0.996278048, 0, 1, -0, 0.996278048, 0, 0.0861980319)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Naples Airport)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(860.094421, 571.05481, 415.894073, -0.997615576, 0, -0.0690164343, 0, 1, 0, 0.0690164343, 0, -0.997615576)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Naples Middle High School)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1232.96606, 539.826965, -980.641479, 0.996907949, -0, -0.0785785392, 0, 1, -0, 0.0785785392, 0, 0.996907949)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Taxi Driver (Naples Train Station)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(450.766937, 570.92688, -143.579956, -0.0294448137, 0, -0.999566376, 0, 1, 0, 0.999566376, 0, -0.0294448137)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #2 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1035.9928, 539.975281, -1240.29236, 0.0311278701, -0, -0.999515414, 0, 1, -0, 0.999515414, 0, 0.0311278701)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #3 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1064.28174, 570.90332, 62.2425842, 0.959941387, -0, -0.280200899, 0, 1, -0, 0.280200899, 0, 0.959941387)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #4 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(972.818787, 570.92865, 425.146301, -0.981289029, 0, 0.192540601, 0, 1, 0, -0.192540601, 0, -0.981289029)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #5 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(614.314636, 570.400146, -35.7809448, 0.991883159, 0, 0.127152488, 0, 1, 0, -0.127152488, 0, 0.991883159)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #6 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(936.386292, 570.525146, -391.552948, 0.0951616168, -0, -0.995461881, 0, 1, -0, 0.995461881, 0, 0.0951616168)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #7 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(682.280151, 539.71875, -1137.51453, -0.087125659, -0.000440879725, 0.996197164, -0.00452321582, 0.999989748, 4.69656661e-05, -0.996187031, -0.00450192299, -0.0871268511)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #8 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1450.21021, 506.176697, -2075.81592, -0.0649536848, 0, -0.997888267, 0, 1, 0, 0.997888267, 0, -0.0649536848)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(734.671875, 539.725159, -1479.3739, 0.980767787, 0, 0.19517836, 0, 1, 0, -0.19517836, 0, 0.980767787)
+  	end    
+})
+
+-- Tab 1: Авто фарм врагов
+local enemyTab = Window:MakeTab({
+    Name = "Авто фарм врагов",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local enemySection = enemyTab:AddSection({
+    Name = "Авто фарм"
+})
+
+local player = game.Players.LocalPlayer
+local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
+local humanoid = player.Character:FindFirstChildOfClass('Humanoid')
+
+local isEnabled = false
+local selectedEnemy = nil
+local initialPosition = nil
+local targetCFrame = CFrame.new(933.573914, 552.094543, -999.070801, -0.97075057, 2.71007434e-06, -0.240090311, -5.90356876e-06, 1, 3.51574672e-05, 0.240090311, 3.55465199e-05, -0.97075057)
+local maxKills = 10
+local isReturnEnabled = true
+local checkHeightTriggered = false
+local standAuraChecked = false
+
+local abilities = {
+    "Vampiric Barrage", "Vaporization Freeze", "Vine Whip", 
+    "Arrow Stab", "Banana", "Arm Crusher", "Barrage", "Heavy Punch", "Light Punch Stand", 
+    "Only One Punch", "Stand Kick", "Rainstorm", "Rain Barrier", 
+    "Ground Slam", "I've Already Healed You", "Rock Trap", "Chop", "Dimensional Clone", 
+    "Flag Slam", "Guess Who's Back", "Love Train", "7 Page Muda", "Frog Summon", 
+    "Heal", "Return To Zero", "Nullify", "Bomb Plant", "Detonate", "Impale", 
+    "Sheer Heart Attack", "Bites the Dust", "No Witnesses", "Heavenly Smite", 
+    "Wound Stitch", "Scissors", "Scalpels", "Scalpel Slash", "Razors", "Blade Generation", 
+    "Armor Shed", "Cycle Slash", "Heavy Rapier Slash", "Thousand Cuts", "3 Page Ora", 
+    "Leg Crusher", "Beatdown", "Ari Beatdown", "Arm Extend", "Head Detach", 
+    "Shin Kick", "Herbal Tea", "Arigato, Gyro.", "Melt Your Heart", "Disc Extraction"
+}
+
+local killCountValue = player:FindFirstChild("KillCount")
+if not killCountValue then
+    killCountValue = Instance.new("IntValue")
+    killCountValue.Name = "KillCount"
+    killCountValue.Value = 0
+    killCountValue.Parent = player
 end
-end)
-end)
+
+local function createBox()
+    local workspace = game:GetService("Workspace")
+    local model = Instance.new("Model")
+    model.Name = "Antifly-model"
+    model.Parent = workspace
+
+    local down = Instance.new("Part")
+    down.Size = Vector3.new(10, 1, 10)
+    down.Anchored = true
+    down.Transparency = 1
+    down.CanCollide = true
+    down.CFrame = humanoidRootPart.CFrame * CFrame.new(0, -7.5, 0)
+    down.Parent = model
+
+    local top = Instance.new("Part")
+    top.Size = Vector3.new(10, 1, 10)
+    top.Anchored = true
+    top.Transparency = 1
+    top.CanCollide = true
+    top.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 7.5, 0)
+    top.Parent = model
+
+    local right = Instance.new("Part")
+    right.Size = Vector3.new(1, 15, 10)
+    right.Anchored = true
+    right.Transparency = 1
+    right.CanCollide = true
+    right.CFrame = humanoidRootPart.CFrame * CFrame.new(5.5, 0, 0)
+    right.Parent = model
+
+    local left = Instance.new("Part")
+    left.Size = Vector3.new(1, 15, 10)
+    left.Anchored = true
+    left.Transparency = 1
+    left.CanCollide = true
+    left.CFrame = humanoidRootPart.CFrame * CFrame.new(-5.5, 0, 0)
+    left.Parent = model
+
+    local front = Instance.new("Part")
+    front.Size = Vector3.new(10, 15, 1)
+    front.Anchored = true
+    front.Transparency = 1
+    front.CanCollide = true
+    front.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 0, -5.5)
+    front.Parent = model
+
+    local back = Instance.new("Part")
+    back.Size = Vector3.new(10, 15, 1)
+    back.Anchored = true
+    back.Transparency = 1
+    back.CanCollide = true
+    back.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 0, 5.5)
+    back.Parent = model
+
+    delay(1, function()
+        model:Destroy()
+    end)
+end
+
+local function checkHeight()
+    targetCFrame = player.Character.HumanoidRootPart.CFrame
+    while isEnabled do
+        if isReturnEnabled then
+            if humanoidRootPart then
+                local yPosition = humanoidRootPart.Position.Y
+                if yPosition < 600 or yPosition > 1500 then
+                    humanoidRootPart.CFrame = targetCFrame
+                    createBox()
+                    checkHeightTriggered = true
+                end
+            end
+        end
+        task.wait(1)
+    end
+end
+
+spawn(checkHeight)
+
+local function findModelsInPlayer()
+    local playerModel = game:GetService("Workspace"):FindFirstChild(player.Name)
+    
+    if not playerModel then
+        OrionLib:MakeNotification({
+            Name = "Ошибка",
+            Content = "Игрок не найден",
+            Time = 3
+        })
+        return
+    end
+    
+    local modelsFound = {}
+
+    for _, object in ipairs(playerModel:GetChildren()) do
+        if object:IsA("Model") then
+            table.insert(modelsFound, object)
+        end
+    end
+
+    for _, model in ipairs(modelsFound) do
+        if not model:FindFirstChild("StandAura") then
+            game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Stand Summon", true, false)
+            break
+        end
+    end
+end
+
+local function autoFarm()
+    if not standAuraChecked then
+        findModelsInPlayer()
+        standAuraChecked = true
+    end
+    
+    while isEnabled do
+        task.wait()
+
+        if selectedEnemy then
+            local enemies = game:GetService("Workspace").NPCs.Hostile:GetChildren()
+            local currentEnemy = nil
+
+            for i = 1, #enemies do
+                local v = enemies[i]
+                if v.Name == selectedEnemy and v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChildOfClass("Humanoid").Health > 0 then
+                    currentEnemy = v
+                    break
+                end
+            end
+
+            if currentEnemy then
+                while currentEnemy:FindFirstChildOfClass("Humanoid").Health > 0 and isEnabled do
+                    task.wait()
+                    humanoidRootPart.CFrame = CFrame.new(currentEnemy.HumanoidRootPart.Position + Vector3.new(0, 7, 0), currentEnemy.HumanoidRootPart.Position)
+                    game.Workspace.CurrentCamera.CameraSubject = player.Character
+                    game.Workspace.CurrentCamera.CameraType = Enum.CameraType.Follow
+                    pcall(function()
+                        if player:DistanceFromCharacter(currentEnemy.HumanoidRootPart.Position) < 10 then
+                            for i = 1, 4 do
+                                game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Light Punch", true, false)
+                            end
+                            game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Kick", true, false)
+                            local PlayerName = LocalPlayer.Name
+                            local abilityPath = game:GetService("Workspace"):FindFirstChild(PlayerName).Scripts.Controls.Abilities
+                            for _, abilityName in ipairs(abilities) do
+                                if abilityPath:FindFirstChild(abilityName) then
+                                    game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer(abilityName, true, false)
+                                end
+                            end
+                        end
+                    end)
+                end
+                killCountValue.Value = killCountValue.Value + 1
+
+                if killCountValue.Value < maxKills then
+                    createBox()
+                    task.wait(0.25)
+                end
+            else
+                humanoidRootPart.CFrame = initialPosition
+                game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Reset Character", true, false)
+                return
+            end
+        end
+    end
+end
+
+enemySection:AddToggle({
+    Name = "Включить авто фарм",
+    Default = false,
+    Callback = function(value)
+        isEnabled = value
+        if value then
+            initialPosition = humanoidRootPart.CFrame
+            spawn(autoFarm)
+        end
+    end
+})
+
+enemySection:AddDropdown({
+    Name = "Выбрать врага",
+    Default = "",
+    Options = {"Bruno Bucciarati", "Giorno Giovanna", "Leaky Eye Luca", "Mafia Associate", "Mafia Capo", "Mafia Enforcer", "Mafia Soldier", "Police Officer"},
+    Callback = function(value)
+        selectedEnemy = value
+    end
+})
+
+enemySection:AddTextbox({
+    Name = "Установить максимальное количество убийств",
+    Default = "10",
+    TextDisappear = true,
+    Callback = function(value)
+        maxKills = tonumber(value) or 10
+    end
+})
+
+enemySection:AddToggle({
+    Name = "Включить возвращение на исходную позицию",
+    Default = true,
+    Callback = function(value)
+        isReturnEnabled = value
+    end
+})
+
+enemySection:AddButton({
+    Name = "Ручной возврат на исходную позицию",
+    Callback = function()
+        humanoidRootPart.CFrame = initialPosition
+    end
+})
+
+
+local Tab = Window:MakeTab({
+    Name = "Полезное",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "Надо"
+})
+
+Tab:AddButton({
+	Name = "Dark Dex V4",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/HackerMan33106/DarkDex/main/DarkDex-V4", true))()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Secret",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Dupe"
+})
+
+Tab:AddButton({
+	Name = "Auto lvl and money",
+	Callback = function()
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
+        local A_1 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective1, 
+            [2] = 1, 
+            [3] = 1
+        }
+        local A_2 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective2, 
+            [2] = 2, 
+            [3] = 1
+        }
+        local A_3 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective3, 
+            [2] = 3, 
+            [3] = 1
+        }
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_1)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_2)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_3)
+  	end
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "Авто прохождение сюжетки",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Прохождение (кликайте)"
+})
+
+
+Tab:AddButton({
+	Name = "BrunoGangQuest",
+	Callback = function()
+      		   local PlayerName = game:GetService("Players").LocalPlayer.Name
+game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("BrunoGangQuest", "Start")
+    local A_1 =
+    {
+        [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.BrunoGangQuest.Objective1,
+        [2] = 1,
+        [3] = 1
+    }
+    local A_2 =
+    {
+        [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.BrunoGangQuest.Objective2.OptionalObjective1,
+        [2] = 1,
+        [3] = 1
+    }
+    local A_3 =
+    {
+        [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.BrunoGangQuest.Objective2,
+        [2] = 2,
+        [3] = 1
+    }
+    local A_4 =
+    {
+        [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.BrunoGangQuest.Objective3,
+        [2] = 3,
+        [3] = 1
+    }
+    local A_5 = 
+    {
+        [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.BrunoGangQuest.Objective4,
+        [2] = 4,
+        [3] = 1
+    }
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("BrunoGangQuest", "AddProgress", A_1)
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("BrunoGangQuest", "AddProgressOptional", A_2)
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("BrunoGangQuest", "AddProgress", A_3)
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("BrunoGangQuest", "AddProgress", A_4)
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("BrunoGangQuest", "AddProgress", A_5)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "KoichiPassportQuest",
+	Callback = function()
+      		   local PlayerName = game:GetService("Players").LocalPlayer.Name
+game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("KoichiPassportQuest", "Start")
+    local A_1 =
+    {
+      [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.KoichiPassportQuest.Objective1,
+      [2] = 1,
+      [3] = 1
+    }
+    local A_2 =
+    {
+      [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.KoichiPassportQuest.Objective2,
+      [2] = 2,
+      [3] = 1
+    }
+    local A_3 =
+    {
+      [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.KoichiPassportQuest.Objective3,
+      [2] = 3,
+      [3] = 1
+    }
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("KoichiPassportQuest", "AddProgress", A_1)
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("KoichiPassportQuest", "AddProgress", A_2)
+    game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("KoichiPassportQuest", "AddProgress", A_3)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "MrXBrunoQuest",
+	Callback = function()
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXBrunoQuest", "Start")
+            local A_1 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXBrunoQuest.Objective1,
+              [2] = 1,
+              [3] = 1
+            }
+            local A_2 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXBrunoQuest.Objective2,
+              [2] = 2,
+              [3] = 1
+            }
+            local A_3 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXBrunoQuest.Objective3,
+              [2] = 3,
+              [3] = 1
+            }
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXBrunoQuest", "AddProgress", A_1)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXBrunoQuest", "AddProgress", A_2)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXBrunoQuest", "AddProgress", A_3)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "PassioneQuest",
+	Callback = function()
+        local running = false
+
+        local function teleportToChest(chest)
+            local FX = chest:FindFirstChild("FX")
+            if FX and FX:IsA("BasePart") then
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(FX.Position + Vector3.new(0, 2, 0))
+                end
+            end
+        end
+        
+        local function teleportToAllChests()
+            local chestFolder = game:GetService("Workspace"):FindFirstChild("Chests")
+            if not chestFolder then
+                OrionLib:MakeNotification({
+                    Name = "Ошибка",
+                    Content = "Папка Chests не найдена в Workspace",
+                    Image = "rbxassetid://4483345998",
+                    Time = 3
+                })
+                return
+            end
+        
+            local spawnedChests = chestFolder:FindFirstChild("SpawnedChests")
+            if not spawnedChests then
+                OrionLib:MakeNotification({
+                    Name = "Ошибка",
+                    Content = "Папка SpawnedChests не найдена в Chests",
+                    Image = "rbxassetid://4483345998",
+                    Time = 3
+                })
+                return
+            end
+        
+            local startTime = tick()
+            local duration = 150
+        
+            while running and (tick() - startTime < duration) do
+                for _, chest in ipairs(spawnedChests:GetChildren()) do
+                    if running then
+                        teleportToChest(chest)
+                        wait(0.20)
+                    end
+                end
+            end
+        
+            running = false
+        end
+        
+        local function enableChestTP()
+            if not running then
+                running = true
+                spawn(function()
+                    teleportToAllChests()
+                end)
+            end
+        end
+        
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        local function PolpoQuest()
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("PassioneQuest", "Start")
+            local A_1 = 
+            {
+                [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.PassioneQuest.Objective1, 
+                [2] = 1, 
+                [3] = 1
+            }
+            local A_2 = 
+            {
+                [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.PassioneQuest.Objective2, 
+                [2] = 2, 
+                [3] = 1
+            }
+            local A_3 = 
+            {
+                [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.PassioneQuest.Objective3, 
+                [2] = 3, 
+                [3] = 3, 
+                [4] = ""
+            }
+            local A_4 = 
+            {
+                [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.PassioneQuest.Objective4, 
+                [2] = 4, 
+                [3] = 1
+            }
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("PassioneQuest", "AddProgress", A_1)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("PassioneQuest", "AddProgress", A_2)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("PassioneQuest", "AddProgress", A_3)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("PassioneQuest", "AddProgress", A_4)
+        end
+        
+        local function PolpoQuest_One()
+            local A_5 = 
+            {
+                [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.PassioneQuest.Objective6, 
+                [2] = 6, 
+                [3] = 1
+            }
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("PassioneQuest", "AddProgress", A_5)
+        end
+        
+        Section:AddButton({
+            Name = "Автоматическое прохождение квеста Польпо",
+            Callback = function()
+                PolpoQuest()
+                enableChestTP()
+                wait(150)
+                PolpoQuest_One()
+            end
+        })
+  	end    
+})    
+
+Tab:AddButton({
+	Name = "RisottoBrunoQuest",
+	Callback = function()
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
+            local A_1 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective1,
+              [2] = 1,
+              [3] = 1
+            }
+            local A_2 = 
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective2,
+              [2] = 2,
+              [3] = 1
+            }
+            local A_3 = 
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective3,
+              [2] = 3,
+              [3] = 1
+            }
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_1)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_2)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_3)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "MrXQuest",
+	Callback = function()
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXQuest", "Start")
+            local A_1 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXQuest.Objective1,
+              [2] = 1,
+              [3] = 1
+            }
+            local A_2 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXQuest.Objective2,
+              [2] = 2,
+              [3] = 1
+            }
+            local A_3 = 
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXQuest.Objective3,
+              [2] = 3,
+              [3] = 1
+            }
+            local A_4 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXQuest.Objective4,
+              [2] = 4,
+              [3] = 1
+            }
+            local A_5 =
+            {
+              [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MrXQuest.Objective5,
+              [2] = 5,
+              [3] = 1
+            }
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXQuest", "AddProgress", A_1)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXQuest", "AddProgress", A_2)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXQuest", "AddProgress", A_3)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXQuest", "AddProgress", A_4)
+            game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MrXQuest", "AddProgress", A_5)
+  	end    
+})
+
+local Tab = Window:MakeTab({
+    Name = "Веселье",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Весело"
+})
+
+Tab:AddButton({
+	Name = "Чай",
+	Callback = function()
+        game:GetService("ReplicatedStorage").LevelAssets.NPCs["Leone Abbachio"]["NPC_Event"]:FireServer("DrinkTea")
+  	end    
+})
+
+local Tab = Window:MakeTab({
+    Name = "Сундуки",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Автофарм"
+})
+
+local running = false
+
+local function pressE()
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+    VirtualInputManager:SendKeyEvent(true, "E", false, game)
+    wait(0.15)
+    VirtualInputManager:SendKeyEvent(false, "E", false, game)
+end
+
+local function interactWithChest(chest)
+    local FX = chest:FindFirstChild("FX")
+    local WoodTop = chest:FindFirstChild("WoodTop")
+    if FX and WoodTop then
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local proximityPrompt = WoodTop:FindFirstChild("ProximityPrompt")
+            if proximityPrompt then
+                local isOpen = not proximityPrompt.Enabled
+                if not isOpen then
+                    proximityPrompt.HoldDuration = 0.01
+                    player.Character.HumanoidRootPart.CFrame = FX.CFrame * CFrame.new(0, 2, 0)
+                    wait(0.1)
+                    pressE()
+                end
+            end
+        end
+    end
+end
+
+local function teleportToAllChests()
+    local chestFolder = game:GetService("Workspace"):FindFirstChild("Chests")
+    if not chestFolder then
+        OrionLib:MakeNotification({
+            Name = "Ошибка",
+            Content = "Папка Chests не найдена в Workspace",
+            Image = "rbxassetid://4483345998",
+            Time = 3
+        })
+        return
+    end
+
+    local spawnedChests = chestFolder:FindFirstChild("SpawnedChests")
+    if not spawnedChests then
+        OrionLib:MakeNotification({
+            Name = "Ошибка",
+            Content = "Папка SpawnedChests не найдена в Chests",
+            Image = "rbxassetid://4483345998",
+            Time = 3
+        })
+        return
+    end
+
+    while running do
+        for _, chest in ipairs(spawnedChests:GetChildren()) do
+            interactWithChest(chest)
+            if not running then break end
+        end
+        wait(0.5)
+    end
+end
+
+local function enableChestAutoFarm()
+    running = true
+    teleportToAllChests()
+end
+
+local function disableChestAutoFarm()
+    running = false
+end
+
+-- Создание переключателя для авто фарма сундуков
+Section:AddToggle({
+    Name = "Авто фарм сундуков",
+    Default = false,
+    Callback = function(caf)
+        if caf then
+            enableChestAutoFarm()
+        else
+            disableChestAutoFarm()
+        end
+    end
+})
