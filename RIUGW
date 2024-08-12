@@ -1,6 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "Riu/Golden Wind v 0.0.0.1", HidePremium = false, SaveConfig = true, ConfigFolder = "Sigma Hub"})
+local Window = OrionLib:MakeWindow({Name = "RIU/MrKitov", HidePremium = false, SaveConfig = true, ConfigFolder = "Sigma Hub"})
 
 local Tab = Window:MakeTab({
 	Name = "Base",
@@ -998,6 +998,7 @@ local function interactWithChest(chest)
                 local isOpen = not proximityPrompt.Enabled
                 if not isOpen then
                     proximityPrompt.HoldDuration = 0.01
+                    proximityPrompt.RequiresLineOfSight = false
                     player.Character.HumanoidRootPart.CFrame = FX.CFrame * CFrame.new(0, 2, 0)
                     wait(0.1)
                     pressE()
