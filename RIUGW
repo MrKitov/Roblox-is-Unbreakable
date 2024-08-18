@@ -979,6 +979,158 @@ Tab:AddButton({
   	end    
 })
 
+local Section = Tab:AddSection({
+	Name = "Spectate"
+})
+
+-- Основные переменные
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+local localPlayer = Players.LocalPlayer
+
+local isSpectating = false
+local spectatePlayer = nil
+local originalCameraType = Workspace.CurrentCamera.CameraType
+local originalCameraSubject = Workspace.CurrentCamera.CameraSubject
+local timeTP = 0.25
+local targetPlayer = nil
+
+-- Функция начала наблюдения за игроком
+local function startSpectating(player)
+    if not player or not player.Character or not player.Character:FindFirstChild("Humanoid") then
+        return
+    end
+    
+    isSpectating = true
+    spectatePlayer = player
+    originalCameraType = Workspace.CurrentCamera.CameraType
+    originalCameraSubject = Workspace.CurrentCamera.CameraSubject
+    
+    Workspace.CurrentCamera.CameraType = Enum.CameraType.Follow
+    Workspace.CurrentCamera.CameraSubject = player.Character:FindFirstChild("Humanoid")
+end
+
+-- Функция прекращения наблюдения
+local function stopSpectating()
+    isSpectating = false
+    spectatePlayer = nil
+    
+    Workspace.CurrentCamera.CameraType = originalCameraType
+    Workspace.CurrentCamera.CameraSubject = originalCameraSubject
+end
+
+-- Функция переключения между наблюдением и прекращением наблюдения
+local function toggleSpectate(playerName)
+    if isSpectating then
+        stopSpectating()
+    else
+        local player = Players:FindFirstChild(playerName)
+        if player then
+            startSpectating(player)
+        else
+            OrionLib:MakeNotification({
+                Name = "Ошибка",
+                Content = "Игрок с именем " .. playerName .. " не найден",
+                Image = "rbxassetid://4483345998",
+                Time = 3
+            })
+        end
+    end
+end
+
+-- Функция обновления выпадающего списка игроков
+local function updateDropdown(dropdown)
+    local playerNames = {}
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= localPlayer then
+            table.insert(playerNames, player.Name)
+        end
+    end
+
+    dropdown:Refresh(playerNames, true)
+end
+
+-- Создание выпадающего списка для выбора игрока для наблюдения
+local dropdown = Section:AddDropdown({
+    Name = "Наблюдать за игроком",
+    Default = "",
+    Options = {},
+    Callback = function(selectedPlayer)
+        targetPlayer = Workspace:FindFirstChild(selectedPlayer)
+        if targetPlayer and targetPlayer:FindFirstChild("HumanoidRootPart") then
+            game.Players.LocalPlayer.Character.Scripts.Controls.Enabled = false
+            toggleSpectate(selectedPlayer)
+        else
+            OrionLib:MakeNotification({
+                Name = "Ошибка",
+                Content = "Не удалось найти игрока или его HumanoidRootPart в Workspace",
+                Image = "rbxassetid://4483345998",
+                Time = 3
+            })
+        end
+    end
+})
+
+-- Обновление списка игроков при добавлении/удалении
+Players.PlayerAdded:Connect(function()
+    updateDropdown(dropdown)
+end)
+
+Players.PlayerRemoving:Connect(function()
+    updateDropdown(dropdown)
+end)
+
+-- Начальное обновление списка игроков
+updateDropdown(dropdown)
+
+-- Кнопка для прекращения наблюдения за игроком
+Section:AddButton({
+    Name = "Перестать наблюдать за игроком",
+    Callback = function()
+        game.Players.LocalPlayer.Character.Scripts.Controls.Enabled = true
+        stopSpectating()
+    end
+})
+
+-- Кнопка для обновления списка игроков
+Section:AddButton({
+    Name = "Обновление списка игроков",
+    Callback = function()
+        updateDropdown(dropdown)
+    end
+})
+
+-- Текстовое поле для установки задержки телепортации
+Section:AddTextbox({
+    Name = "Задержка телепорта к игроку",
+    Default = tostring(timeTP),
+    TextDisappear = false,
+    Callback = function(timeOut)
+        timeTP = tonumber(timeOut) or timeTP
+    end
+})
+
+-- Кнопка для прекращения наблюдения и телепортации к игроку
+Section:AddButton({
+    Name = "Перестать наблюдать и телепортироваться",
+    Callback = function()
+        game.Players.LocalPlayer.Character.Scripts.Controls.Enabled = true
+        stopSpectating()
+        wait(timeTP)
+        if targetPlayer and targetPlayer:FindFirstChild("HumanoidRootPart") then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetPlayer.HumanoidRootPart.CFrame
+        else
+            OrionLib:MakeNotification({
+                Name = "Ошибка",
+                Content = "Не удалось найти игрока или его HumanoidRootPart в Workspace",
+                Image = "rbxassetid://4483345998",
+                Time = 3
+            })
+        end
+    end
+})
+
 local Tab = Window:MakeTab({
     Name = "Сундуки",
     Icon = "rbxassetid://4483345998",
