@@ -20,13 +20,13 @@ Tab:AddLabel("Discord server: none")
 
 Tab:AddLabel("Last Update: August 18, 2024")
 
-Tab:AddLabel("The script helped: HackerMan")
+Tab:AddLabel("The script helped: HackerMan3310")
 
 local Section = Tab:AddSection({
 	Name = "His information"
 })
 
-Tab:AddLabel("Discord: HackerMan3310(aboba3109)")
+Tab:AddLabel("Discord: aboba3109")
 
 Tab:AddLabel("YouTube: none")
 
@@ -590,6 +590,21 @@ local Tab = Window:MakeTab({
 
 local Section = Tab:AddSection({
     Name = "Надо"
+})
+
+local PlayerName = game:GetService("Players").LocalPlayer.Name
+local oguzok = game:GetService("Workspace"):FindFirstChild(PlayerName):FindFirstChild("Humanoid").JumpPower
+Tab:AddSlider({
+	Name = "Jump",
+	Min = oguzok,
+	Max = oguzok * 10,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Jump",
+	Callback = function(Jump)
+		game:GetService("Workspace"):FindFirstChild(PlayerName):FindFirstChild("Humanoid").JumpPower = Jump
+	end    
 })
 
 local PlayerName = game:GetService("Players").LocalPlayer.Name
