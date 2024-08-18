@@ -1206,7 +1206,7 @@ local function createButtons(increase)
 
         -- Создаем кнопки для каждого атрибута
         for _, attribute in ipairs(attributes) do
-            local buttonText = increase and "Issue the item: " .. attribute.name or "Remove the item: " .. attribute.name
+            local buttonText = increase and "Give item: " .. attribute.name or "Remove item: " .. attribute.name
             Section:AddButton({
                 Name = buttonText,
                 Callback = function()
@@ -1223,4 +1223,3 @@ end
 createButtons(true)
 
 createButtons(false)
-
