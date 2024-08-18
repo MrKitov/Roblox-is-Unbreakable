@@ -12,7 +12,7 @@ local Section = Tab:AddSection({
 	Name = "Information"
 })
 
-Tab:AddLabel("Discord: agata_krisi1")
+Tab:AddLabel("Discord: agata_kristi1")
 
 Tab:AddLabel("YouTube: none")
 
