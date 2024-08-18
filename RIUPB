@@ -3,6 +3,24 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "RIU/MrKitov"})
 
 local Tab = Window:MakeTab({
+	Name = "Info",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Information"
+})
+
+Tab:AddLabel("Discord: agata_krisi1")
+
+Tab:AddLabel("YouTube: none")
+
+Tab:AddLabel("Discord server: none")
+
+Tab:AddLabel("Last Update: August 18, 2024")
+
+local Tab = Window:MakeTab({
 	Name = "Base",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
