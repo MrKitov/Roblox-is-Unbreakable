@@ -335,21 +335,30 @@ Tab:AddButton({
   	end    
 })
 
+local Tab = Window:MakeTab({
+	Name = "Автофарм",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Автофарм"
+})
+
 -- Основные переменные
 local player = game.Players.LocalPlayer
 local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
-local hostileNPCsFolder = game:GetService("Workspace").NPCs.Hostile
+local humanoid = game:GetService('Players').LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
 
--- Переменные автофарма
 local isEnabled = false
 local selectedEnemy = nil
 local initialPosition = nil
+local targetCFrame = CFrame.new(372.002289, 30.8957806, 3871.77686, -0.116508633, -4.07337026e-08, 0.993189692, -9.74306147e-09, 1, 3.98700806e-08, -0.993189692, -5.03149966e-09, -0.116508633)
 local maxKills = 10
 local isReturnEnabled = true
 local checkHeightTriggered = false
 local standAuraChecked = false
 
--- Список доступных способностей
 local abilities = {
     "Vampiric Barrage", "Vaporization Freeze", "Vine Whip", 
     "Arrow Stab", "Banana", "Arm Crusher", "Barrage", "Heavy Punch", "Light Punch Stand", 
@@ -364,7 +373,6 @@ local abilities = {
     "Shin Kick", "Herbal Tea", "Arigato, Gyro.", "Melt Your Heart", "Disc Extraction"
 }
 
--- Подсчёт убийств
 local killCountValue = player:FindFirstChild("KillCount")
 if not killCountValue then
     killCountValue = Instance.new("IntValue")
@@ -373,35 +381,116 @@ if not killCountValue then
     killCountValue.Parent = player
 end
 
--- Функция для обновления списка врагов
-local function updateEnemyDropdown(dropdown)
-    local enemyNames = {}
-    for _, enemy in pairs(hostileNPCsFolder:GetChildren()) do
-        if enemy:IsA("Model") and enemy:FindFirstChild("HumanoidRootPart") and enemy.Name ~= "RespawnHandler" then
-            local enemyName = enemy.Name
-            if not table.find(enemyNames, enemyName) then
-                table.insert(enemyNames, enemyName)
-            end
-        end
-    end
-    
-    dropdown:Refresh(enemyNames, true)
+local function createBox()
+    local workspace = game:GetService("Workspace")
+    local model = Instance.new("Model")
+    model.Name = "Antifly-model"
+    model.Parent = workspace
+
+    local down = Instance.new("Part")
+    down.Size = Vector3.new(10, 1, 10)
+    down.Anchored = true
+    down.Transparency = 1
+    down.CanCollide = true
+    down.CFrame = humanoidRootPart.CFrame * CFrame.new(0, -7.5, 0)
+    down.Parent = model
+
+    local top = Instance.new("Part")
+    top.Size = Vector3.new(10, 1, 10)
+    top.Anchored = true
+    top.Transparency = 1
+    top.CanCollide = true
+    top.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 7.5, 0)
+    top.Parent = model
+
+    local right = Instance.new("Part")
+    right.Size = Vector3.new(1, 15, 10)
+    right.Anchored = true
+    right.Transparency = 1
+    right.CanCollide = true
+    right.CFrame = humanoidRootPart.CFrame * CFrame.new(5.5, 0, 0)
+    right.Parent = model
+
+    local left = Instance.new("Part")
+    left.Size = Vector3.new(1, 15, 10)
+    left.Anchored = true
+    left.Transparency = 1
+    left.CanCollide = true
+    left.CFrame = humanoidRootPart.CFrame * CFrame.new(-5.5, 0, 0)
+    left.Parent = model
+
+    local front = Instance.new("Part")
+    front.Size = Vector3.new(10, 15, 1)
+    front.Anchored = true
+    front.Transparency = 1
+    front.CanCollide = true
+    front.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 0, -5.5)
+    front.Parent = model
+
+    local back = Instance.new("Part")
+    back.Size = Vector3.new(10, 15, 1)
+    back.Anchored = true
+    back.Transparency = 1
+    back.CanCollide = true
+    back.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 0, 5.5)
+    back.Parent = model
+
+    delay(1, function()
+        model:Destroy()
+    end)
 end
 
--- Функция автофарма врагов
-local function autoFarm()
-    if not standAuraChecked then
-        local playerModel = game:GetService("Workspace"):FindFirstChild(player.Name)
-        
-        if playerModel then
-            for _, object in ipairs(playerModel:GetChildren()) do
-                if object:IsA("Model") and not object:FindFirstChild("StandAura") then
-                    game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Stand Summon", true, false)
-                    break
+local function checkHeight()
+    targetCFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+    while isEnabled do
+        if isReturnEnabled then
+            if humanoidRootPart then
+                local yPosition = humanoidRootPart.Position.Y
+                if yPosition < 0 or yPosition > 500 then
+                    humanoidRootPart.CFrame = targetCFrame
+                    createBox()
+                    checkHeightTriggered = true
                 end
             end
         end
-        
+        task.wait(1)
+    end
+end
+
+spawn(checkHeight)
+
+local function findModelsInPlayer()
+    local playerModel = game:GetService("Workspace"):FindFirstChild(player.Name)
+    
+    if not playerModel then
+        OrionLib:MakeNotification({
+            Name = "Ошибка",
+            Content = "Игрок не найден",
+            Image = "rbxassetid://4483345998",
+            Time = 3
+        })
+        return
+    end
+    
+    local modelsFound = {}
+
+    for _, object in ipairs(playerModel:GetChildren()) do
+        if object:IsA("Model") then
+            table.insert(modelsFound, object)
+        end
+    end
+
+    for _, model in ipairs(modelsFound) do
+        if not model:FindFirstChild("StandAura") then
+            game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Stand Summon", true, false)
+            break
+        end
+    end
+end
+
+local function autoFarm()
+    if not standAuraChecked then
+        findModelsInPlayer()
         standAuraChecked = true
     end
     
@@ -409,7 +498,7 @@ local function autoFarm()
         task.wait()
 
         if selectedEnemy then
-            local enemies = hostileNPCsFolder:GetChildren()
+            local enemies = game:GetService("Workspace").NPCs.Hostile:GetChildren()
             local currentEnemy = nil
 
             for i = 1, #enemies do
@@ -424,13 +513,15 @@ local function autoFarm()
                 while currentEnemy:FindFirstChildOfClass("Humanoid").Health > 0 and isEnabled do
                     task.wait()
                     humanoidRootPart.CFrame = CFrame.new(currentEnemy.HumanoidRootPart.Position + Vector3.new(0, 7, 0), currentEnemy.HumanoidRootPart.Position)
+                    game.Workspace.CurrentCamera.CameraSubject = player.Character
+                    game.Workspace.CurrentCamera.CameraType = Enum.CameraType.Follow
                     pcall(function()
                         if player:DistanceFromCharacter(currentEnemy.HumanoidRootPart.Position) < 10 then
                             for i = 1, 4 do
                                 game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Light Punch", true, false)
                             end
                             game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Kick", true, false)
-                            local PlayerName = player.Name
+                            local PlayerName = LocalPlayer.Name
                             local abilityPath = game:GetService("Workspace"):FindFirstChild(PlayerName).Scripts.Controls.Abilities
                             for _, abilityName in ipairs(abilities) do
                                 if abilityPath:FindFirstChild(abilityName) then
@@ -443,95 +534,124 @@ local function autoFarm()
                 killCountValue.Value = killCountValue.Value + 1
 
                 if killCountValue.Value < maxKills then
+                    createBox()
                     task.wait(0.25)
                 end
             else
                 humanoidRootPart.CFrame = initialPosition
-                game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Reset Character", true, false)
-                return
+                game.Workspace.CurrentCamera.CameraSubject = player.Character.Humanoid
+                game.Workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+                isEnabled = false
             end
         end
     end
+    if killCountValue.Value >= maxKills then
+        isEnabled = false
+        game.Workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+        humanoidRootPart.CFrame = targetCFrame
+        createBox()
+    elseif checkHeightTriggered then
+        checkHeightTriggered = false
+        autoFarm()
+    else
+        autoFarm()
+    end
 end
 
--- Создание вкладки для автофарма
-local enemyTab = Window:MakeTab({
-    Name = "Автофарм",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
+local function monitorHeight()
+    while isEnabled do
+        if isReturnEnabled then
+            if humanoidRootPart then
+                local yPosition = humanoidRootPart.Position.Y
+                if yPosition < 0 or yPosition > 500 then
+                    humanoidRootPart.CFrame = targetCFrame
+                    repeat
+                        createBox()
+                        task.wait(1)
+                        yPosition = humanoidRootPart.Position.Y
+                    until yPosition >= 0 and yPosition <= 500
+                    autoFarm()
+                end
+            end
+        end
+        task.wait(1)
+    end
+end
 
-local enemySection = enemyTab:AddSection({
-    Name = "Функции автофарма"
-})
+local function updateEnemyList(dropdown)
+    local enemyNames = {}
+    local uniqueEnemies = {}
+    for _, enemy in ipairs(game:GetService("Workspace").NPCs.Hostile:GetChildren()) do
+        if enemy:IsA("Model") and not uniqueEnemies[enemy.Name] then
+            table.insert(enemyNames, enemy.Name)
+            uniqueEnemies[enemy.Name] = true
+        end
+    end
+    dropdown:Refresh(enemyNames)
+end
 
--- Добавление переключателя для включения/выключения автофарма
-enemySection:AddToggle({
-    Name = "Включить авто фарм",
+-- Включение/выключение автофарма
+Section:AddToggle({
+    Name = "Вкл/выкл авто фарм врагов",
     Default = false,
-    Callback = function(value)
-        isEnabled = value
-        if value then
-            initialPosition = humanoidRootPart.CFrame
-            spawn(autoFarm)
+    Callback = function(AFE)
+        if AFE then
+            if selectedEnemy then
+                isEnabled = true
+                initialPosition = humanoidRootPart.CFrame
+                if killCountValue.Value >= maxKills then
+                    killCountValue.Value = 0
+                end
+                spawn(autoFarm)
+                spawn(monitorHeight)
+            else
+                OrionLib:MakeNotification({
+                    Name = "Ошибка",
+                    Content = "Враг не выбран!",
+                    Image = "rbxassetid://4483345998",
+                    Time = 3
+                })
+            end
+        else
+            isEnabled = false
+            createBox()
+            humanoid:ChangeState('Jumping')
+            game.Workspace.CurrentCamera.CameraSubject = player.Character.Humanoid
+            game.Workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
         end
     end
 })
 
--- Добавление выпадающего списка врагов
-local enemyDropdown = enemySection:AddDropdown({
-    Name = "Выбрать врага",
+local enemyDropdown = Section:AddDropdown({
+    Name = "Выберите врага",
     Default = "",
     Options = {},
-    Callback = function(value)
-        selectedEnemy = value
+    Callback = function(enemy)
+        selectedEnemy = enemy
     end
 })
 
--- Начальное обновление списка врагов
-updateEnemyDropdown(enemyDropdown)
-
--- Обновление списка врагов при добавлении/удалении NPC
-hostileNPCsFolder.ChildAdded:Connect(function()
-    updateEnemyDropdown(enemyDropdown)
+game.Players.PlayerAdded:Connect(function()
+    updateEnemyList(enemyDropdown)
 end)
 
-hostileNPCsFolder.ChildRemoved:Connect(function()
-    updateEnemyDropdown(enemyDropdown)
+game.Players.PlayerRemoving:Connect(function()
+    updateEnemyList(enemyDropdown)
 end)
 
--- Добавление кнопки для ручного обновления списка врагов
-enemySection:AddButton({
-    Name = "Обновить список врагов",
+updateEnemyList(enemyDropdown)
+
+Section:AddButton({
+    Name = "Перезагрузить список",
     Callback = function()
-        updateEnemyDropdown(enemyDropdown)
+        updateEnemyList(enemyDropdown)
     end
 })
 
--- Добавление текстового поля для установки максимального количества убийств
-enemySection:AddTextbox({
-    Name = "Установить максимальное количество убийств",
-    Default = "10",
-    TextDisappear = true,
-    Callback = function(value)
-        maxKills = tonumber(value) or 10
-    end
-})
-
--- Добавление переключателя для включения/выключения возвращения на исходную позицию
-enemySection:AddToggle({
-    Name = "Включить возвращение на исходную позицию",
-    Default = true,
-    Callback = function(value)
-        isReturnEnabled = value
-    end
-})
-
--- Добавление кнопки для ручного возврата на исходную позицию
-enemySection:AddButton({
-    Name = "Ручной возврат на исходную позицию",
+Section:AddButton({
+    Name = "Сбросить выбранного врага",
     Callback = function()
-        humanoidRootPart.CFrame = initialPosition
+        selectedEnemy = nil
     end
 })
 
