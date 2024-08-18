@@ -38,11 +38,11 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 
-local Section = Tab:AddSection({Name = "Хз"})
+local Section = Tab:AddSection({Name = "Main"})
 
 OrionLib:MakeNotification({
-	Name = "Ура!",
-	Content = "Скрипт запущен!",
+	Name = "Yeeeeeey!",
+	Content = "The script is running!",
 	Image = "rbxassetid://4483345998",
 	Time = 5
 })
@@ -62,15 +62,15 @@ Tab:AddButton({
 })
 
 local Section = Tab:AddSection({
-	Name = "Инстант"
+	Name = "Instant"
 })
 
 local amount = 1
 
 -- Создание текстового поля для ввода количества предметов
 Section:AddTextbox({
-    Name = "Сколько купить",
-    Default = "0",
+    Name = "How much to buy",
+    Default = "1",
     TextDisappear = false,
     Callback = function(Iamount)
         amount = tonumber(Iamount)
@@ -79,9 +79,9 @@ Section:AddTextbox({
 
 -- Создание выпадающего меню для выбора предметов и их покупки
 Section:AddDropdown({
-    Name = "Покупка предметов",
+    Name = "Buying items",
     Default = "",
-    Options = {"Каменная маска(10000$)", "Стальной шар(8000$)", "Стрела(15000$)", "Локакака(100000$)", "Реквием стрела(200000$)"},
+    Options = {"Stone Mask(10000$)", "Steel Ball(8000$)", "Arrow(15000$)", "Locacaca(100000$)", "Requiem Arrow(200000$)"},
     Callback = function(IBuy)
         PlayerName = game:GetService("Players").LocalPlayer.Name
         if IBuy == "Каменная маска(10000$)" then
@@ -99,7 +99,7 @@ Section:AddDropdown({
 })
 
 Tab:AddButton({
-	Name = "Покупка предмета",
+	Name = "Buying an item",
 	Callback = function()
         game:GetService("ReplicatedStorage").Events.ItemBuyEvent:FireServer(game:GetService("Workspace"):FindFirstChild(PlayerName), item, amount)
   	end    
@@ -263,13 +263,13 @@ Tab:AddButton({
 })
 
 local Tab = Window:MakeTab({
-	Name = "Автофарм",
+	Name = "Autofarm",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 
 local Section = Tab:AddSection({
-	Name = "Автофарм"
+	Name = "Autofarm"
 })
 
 -- Основные переменные
@@ -391,8 +391,8 @@ local function findModelsInPlayer()
     
     if not playerModel then
         OrionLib:MakeNotification({
-            Name = "Ошибка",
-            Content = "Игрок не найден",
+            Name = "Wrong",
+            Content = "The enemy has not been found",
             Image = "rbxassetid://4483345998",
             Time = 3
         })
@@ -519,7 +519,7 @@ end
 
 -- Включение/выключение автофарма
 Section:AddToggle({
-    Name = "Вкл/выкл авто фарм врагов",
+    Name = "On/off autofarm enemies",
     Default = false,
     Callback = function(AFE)
         if AFE then
@@ -550,7 +550,7 @@ Section:AddToggle({
 })
 
 local enemyDropdown = Section:AddDropdown({
-    Name = "Выберите врага",
+    Name = "Select enemy",
     Default = "",
     Options = {},
     Callback = function(enemy)
@@ -569,27 +569,27 @@ end)
 updateEnemyList(enemyDropdown)
 
 Section:AddButton({
-    Name = "Перезагрузить список",
+    Name = "Refresh",
     Callback = function()
         updateEnemyList(enemyDropdown)
     end
 })
 
 Section:AddButton({
-    Name = "Сбросить выбранного врага",
+    Name = "Reset the selected enemy",
     Callback = function()
         selectedEnemy = nil
     end
 })
 
 local Tab = Window:MakeTab({
-    Name = "Полезное",
+    Name = "Useful",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
 local Section = Tab:AddSection({
-    Name = "Надо"
+    Name = "We have to"
 })
 
 local PlayerName = game:GetService("Players").LocalPlayer.Name
@@ -648,7 +648,7 @@ end
 
 -- Создание выпадающего списка
 local dropdown = Section:AddDropdown({
-    Name = "Телепорт к игрокам",
+    Name = "Teleport to the player",
     Default = "",
     Options = {},
     Callback = function(selectedPlayer)
@@ -679,7 +679,7 @@ end)
 updateDropdown(dropdown)
 
 local Tab = Window:MakeTab({
-    Name = "Веселье",
+    Name = "Funny",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -758,7 +758,7 @@ end
 
 -- Создание выпадающего списка для выбора игрока для наблюдения
 local dropdown = Section:AddDropdown({
-    Name = "Наблюдать за игроком",
+    Name = "Spectate the player",
     Default = "",
     Options = {},
     Callback = function(selectedPlayer)
@@ -768,8 +768,8 @@ local dropdown = Section:AddDropdown({
             toggleSpectate(selectedPlayer)
         else
             OrionLib:MakeNotification({
-                Name = "Ошибка",
-                Content = "Не удалось найти игрока или его HumanoidRootPart в Workspace",
+                Name = "Wrong",
+                Content = "Unable to find the player or his HumanoidRootPart in Workspace",
                 Image = "rbxassetid://4483345998",
                 Time = 3
             })
@@ -791,7 +791,7 @@ updateDropdown(dropdown)
 
 -- Кнопка для прекращения наблюдения за игроком
 Section:AddButton({
-    Name = "Перестать наблюдать за игроком",
+    Name = "Stop watching the player",
     Callback = function()
         game.Players.LocalPlayer.Character.Scripts.Controls.Enabled = true
         stopSpectating()
@@ -800,7 +800,7 @@ Section:AddButton({
 
 -- Кнопка для обновления списка игроков
 Section:AddButton({
-    Name = "Обновление списка игроков",
+    Name = "Updating the list of players",
     Callback = function()
         updateDropdown(dropdown)
     end
@@ -808,7 +808,7 @@ Section:AddButton({
 
 -- Текстовое поле для установки задержки телепортации
 Section:AddTextbox({
-    Name = "Задержка телепорта к игроку",
+    Name = "Delayed teleport to player",
     Default = tostring(timeTP),
     TextDisappear = false,
     Callback = function(timeOut)
@@ -818,7 +818,7 @@ Section:AddTextbox({
 
 -- Кнопка для прекращения наблюдения и телепортации к игроку
 Section:AddButton({
-    Name = "Перестать наблюдать и телепортироваться",
+    Name = "Stop watching and teleporting",
     Callback = function()
         game.Players.LocalPlayer.Character.Scripts.Controls.Enabled = true
         stopSpectating()
@@ -827,8 +827,8 @@ Section:AddButton({
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetPlayer.HumanoidRootPart.CFrame
         else
             OrionLib:MakeNotification({
-                Name = "Ошибка",
-                Content = "Не удалось найти игрока или его HumanoidRootPart в Workspace",
+                Name = "Wrong",
+                Content = "Unable to find the player or his HumanoidRootPart in Workspace",
                 Image = "rbxassetid://4483345998",
                 Time = 3
             })
@@ -855,7 +855,7 @@ end
 
 -- Создание выпадающего списка
 local dropdown = Section:AddDropdown({
-    Name = "Телепорт к игрокам",
+    Name = "Teleport the player",
     Default = "",
     Options = {},
     Callback = function(selectedPlayer)
@@ -925,17 +925,17 @@ Tab:AddButton({
 })
 
 local Tab = Window:MakeTab({
-	Name = "Сюжетка",
+	Name = "Story",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 
 local Section = Tab:AddSection({
-	Name = "Авто(Кликать)"
+	Name = "Auto(Clickable)"
 })
 
 Tab:AddButton({
-	Name = "Авто-Сюжетка",
+	Name = "Auto-Story",
 	Callback = function()
         local PlayerName = game:GetService("Players").LocalPlayer.Name
         game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "Start")
@@ -1055,13 +1055,13 @@ Tab:AddButton({
 })
 
 local Tab = Window:MakeTab({
-    Name = "Сундуки",
+    Name = "Chests",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
 local Section = Tab:AddSection({
-	Name = "Автофарм"
+	Name = "Autofarm"
 })
 
 local running = false
@@ -1098,8 +1098,8 @@ local function teleportToAllChests()
     local chestFolder = game:GetService("Workspace"):FindFirstChild("Chests")
     if not chestFolder then
         OrionLib:MakeNotification({
-            Name = "Ошибка",
-            Content = "Папка Chests не найдена в Workspace",
+            Name = "Wrong",
+            Content = "Chests folder not found in Workspace",
             Image = "rbxassetid://4483345998",
             Time = 3
         })
@@ -1109,8 +1109,8 @@ local function teleportToAllChests()
     local spawnedChests = chestFolder:FindFirstChild("SpawnedChests")
     if not spawnedChests then
         OrionLib:MakeNotification({
-            Name = "Ошибка",
-            Content = "Папка SpawnedChests не найдена в Chests",
+            Name = "Wrong",
+            Content = "SpawnedChests folder not found in Chests",
             Image = "rbxassetid://4483345998",
             Time = 3
         })
@@ -1137,7 +1137,7 @@ end
 
 -- Создание переключателя для авто фарма сундуков
 Section:AddToggle({
-    Name = "Авто фарм сундуков",
+    Name = "Autofarm Chests",
     Default = false,
     Callback = function(caf)
         if caf then
@@ -1150,14 +1150,14 @@ Section:AddToggle({
 
 -- Создание вкладки
 local Tab = Window:MakeTab({
-    Name = "Инвентарь",
+    Name = "Inventory",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
 -- Создание секции
 local Section = Tab:AddSection({
-    Name = "Управление предметами"
+    Name = "Item management"
 })
 
 -- Переменная для хранения значения
@@ -1165,7 +1165,7 @@ local Value = 1
 
 -- Создание текстового поля
 Section:AddTextbox({
-    Name = "Введите число",
+    Name = "Enter a number",
     Default = "1",
     TextDisappear = true,
     Callback = function(V)
@@ -1206,7 +1206,7 @@ local function createButtons(increase)
 
         -- Создаем кнопки для каждого атрибута
         for _, attribute in ipairs(attributes) do
-            local buttonText = increase and "Выдать предмет: " .. attribute.name or "Убрать предмет: " .. attribute.name
+            local buttonText = increase and "Issue the item: " .. attribute.name or "Remove the item: " .. attribute.name
             Section:AddButton({
                 Name = buttonText,
                 Callback = function()
@@ -1216,13 +1216,11 @@ local function createButtons(increase)
             })
         end
     else
-        Section:AddLabel("У папки 'Inventory' было изменено название или её местонахождение.")
+        Section:AddLabel("The name or location of the 'Inventory' folder has been changed.")
     end
 end
 
--- Создание кнопок для добавления предметов
 createButtons(true)
 
--- Создание кнопок для удаления предметов
 createButtons(false)
 
