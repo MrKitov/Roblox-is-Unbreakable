@@ -1,0 +1,855 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "RIU/MrKitov"})
+
+local Tab = Window:MakeTab({
+	Name = "Base",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({Name = "Хз"})
+
+OrionLib:MakeNotification({
+	Name = "Ура!",
+	Content = "Скрипт запущен!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+Tab:AddButton({
+	Name = "Heal(50$)",
+	Callback = function()
+      		game:GetService("Workspace").NPCs.Friendly.Des.Scripts.QuestHandler.UpdateEvent:FireServer()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Kill yourself",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+  	end    
+})
+
+local Section = Tab:AddSection({
+	Name = "Инстант"
+})
+
+local amount = 1
+
+-- Создание текстового поля для ввода количества предметов
+Section:AddTextbox({
+    Name = "Сколько купить",
+    Default = "0",
+    TextDisappear = false,
+    Callback = function(Iamount)
+        amount = tonumber(Iamount)
+    end
+})
+
+-- Создание выпадающего меню для выбора предметов и их покупки
+Section:AddDropdown({
+    Name = "Покупка предметов",
+    Default = "",
+    Options = {"Каменная маска(10000$)", "Стальной шар(8000$)", "Стрела(15000$)", "Локакака(100000$)", "Реквием стрела(200000$)"},
+    Callback = function(IBuy)
+        PlayerName = game:GetService("Players").LocalPlayer.Name
+        if IBuy == "Каменная маска(10000$)" then
+            item = "StoneMask"
+        elseif IBuy == "Стальной шар(8000$)" then
+            item = "SteelBall"
+        elseif IBuy == "Стрела(15000$)" then
+            item = "Arrow"
+        elseif IBuy == "Локакака(100000$)" then
+            item = "Locacaca"
+        elseif IBuy == "Реквием стрела(200000$)" then
+            item = "RequiemArrow"
+        end
+    end
+})
+
+Tab:AddButton({
+	Name = "Покупка предмета",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Events.ItemBuyEvent:FireServer(game:GetService("Workspace"):FindFirstChild(PlayerName), item, amount)
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Teleports",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "NPC"
+})
+
+Tab:AddButton({
+	Name = "Black Market Dealer",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1895.61096, 30.1241684, 3470.26343, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Coachman (Dio's Castle)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-967.41394, 260.840271, -352.694275, -0.0684918165, 0, 0.997651696, 0, 1, 0, -0.997651696, 0, -0.0684918165)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Coachman (Joestar Mansion)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1460.94006, 25.0752354, 3042.50635, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Coachman (London)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(787.634521, 25.3363457, 4506.26709, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Coachman (Windknight's Lot)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-555.865906, 37.8752594, 1023.02338, 0.437980533, -0, -0.898984432, 0, 1, -0, 0.898984432, 0, 0.437980533)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Denqa",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1919.57324, 30.787178, 3070.55908, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Des",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-265.580109, 33.4589462, 1056.38147, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Dire",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-562.227356, 37.8444519, 1085.72742, -0.028241992, 0, -0.999601066, 0, 1, 0, 0.999601066, 0, -0.028241992)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Funny Valentine",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-569.073792, 37.8752708, 1131.1427, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Homeless Man",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2173.61377, 30.1444378, 3041.07739, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Jonathan Joestar",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-998.642639, 260.963409, -317.292389, 0.990246296, -0, -0.139328033, 0, 1, -0, 0.139328033, 0, 0.990246296)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Jonathan Joestar (Mansion)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(733.297729, 28.3134003, 4730.35205, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Jonathan Joestar (Teen)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(385.343262, 24.9898129, 3883.85034, 0.930436432, -0, -0.36645332, 0, 1, -0, 0.36645332, 0, 0.930436432)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Police Officer",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1873.09436, 30.2046738, 3002.86133, -0.696670175, 0, 0.717391491, 0, 1, 0, -0.717391491, 0, -0.696670175)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Robert E. O. Speedwagon",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1914.75977, 30.2046738, 3392.70532, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Straizo",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-6.41537666, 33.0752335, 1333.17957, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #2 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1796.18115, 30.2146606, 2994.25391, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake #3 (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-458.66571, 32.850853, 1067.61438, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Whitesnake (NPC)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(729.826172, 25.1624985, 4676.51709, 0.819155693, 0, 0.573571265, 0, 1, 0, -0.573571265, 0, 0.819155693)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Will Zeppeli",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-35.3719482, 49.918972, 109.212746, 0.819467068, 0, 0.573126256, 0, 1, 0, -0.573126256, 0, 0.819467068)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Will Zeppeli (Hamon)",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(751.563171, 25.3559589, 4068.03198, -0.0610541105, 0, -0.998134434, 0, 1, 0, 0.998134434, 0, -0.0610541105)
+  	end    
+})
+
+-- Основные переменные
+local player = game.Players.LocalPlayer
+local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
+local hostileNPCsFolder = game:GetService("Workspace").NPCs.Hostile
+
+-- Переменные автофарма
+local isEnabled = false
+local selectedEnemy = nil
+local initialPosition = nil
+local maxKills = 10
+local isReturnEnabled = true
+local checkHeightTriggered = false
+local standAuraChecked = false
+
+-- Список доступных способностей
+local abilities = {
+    "Vampiric Barrage", "Vaporization Freeze", "Vine Whip", 
+    "Arrow Stab", "Banana", "Arm Crusher", "Barrage", "Heavy Punch", "Light Punch Stand", 
+    "Only One Punch", "Stand Kick", "Rainstorm", "Rain Barrier", 
+    "Ground Slam", "I've Already Healed You", "Rock Trap", "Chop", "Dimensional Clone", 
+    "Flag Slam", "Guess Who's Back", "Love Train", "7 Page Muda", "Frog Summon", 
+    "Heal", "Return To Zero", "Nullify", "Bomb Plant", "Detonate", "Impale", 
+    "Sheer Heart Attack", "Bites the Dust", "No Witnesses", "Heavenly Smite", 
+    "Wound Stitch", "Scissors", "Scalpels", "Scalpel Slash", "Razors", "Blade Generation", 
+    "Armor Shed", "Cycle Slash", "Heavy Rapier Slash", "Thousand Cuts", "3 Page Ora", 
+    "Leg Crusher", "Beatdown", "Ari Beatdown", "Arm Extend", "Head Detach", 
+    "Shin Kick", "Herbal Tea", "Arigato, Gyro.", "Melt Your Heart", "Disc Extraction"
+}
+
+-- Подсчёт убийств
+local killCountValue = player:FindFirstChild("KillCount")
+if not killCountValue then
+    killCountValue = Instance.new("IntValue")
+    killCountValue.Name = "KillCount"
+    killCountValue.Value = 0
+    killCountValue.Parent = player
+end
+
+-- Функция для обновления списка врагов
+local function updateEnemyDropdown(dropdown)
+    local enemyNames = {}
+    for _, enemy in pairs(hostileNPCsFolder:GetChildren()) do
+        if enemy:IsA("Model") and enemy:FindFirstChild("HumanoidRootPart") and enemy.Name ~= "RespawnHandler" then
+            local enemyName = enemy.Name
+            if not table.find(enemyNames, enemyName) then
+                table.insert(enemyNames, enemyName)
+            end
+        end
+    end
+    
+    dropdown:Refresh(enemyNames, true)
+end
+
+-- Функция автофарма врагов
+local function autoFarm()
+    if not standAuraChecked then
+        local playerModel = game:GetService("Workspace"):FindFirstChild(player.Name)
+        
+        if playerModel then
+            for _, object in ipairs(playerModel:GetChildren()) do
+                if object:IsA("Model") and not object:FindFirstChild("StandAura") then
+                    game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Stand Summon", true, false)
+                    break
+                end
+            end
+        end
+        
+        standAuraChecked = true
+    end
+    
+    while isEnabled do
+        task.wait()
+
+        if selectedEnemy then
+            local enemies = hostileNPCsFolder:GetChildren()
+            local currentEnemy = nil
+
+            for i = 1, #enemies do
+                local v = enemies[i]
+                if v.Name == selectedEnemy and v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChildOfClass("Humanoid").Health > 0 then
+                    currentEnemy = v
+                    break
+                end
+            end
+
+            if currentEnemy then
+                while currentEnemy:FindFirstChildOfClass("Humanoid").Health > 0 and isEnabled do
+                    task.wait()
+                    humanoidRootPart.CFrame = CFrame.new(currentEnemy.HumanoidRootPart.Position + Vector3.new(0, 7, 0), currentEnemy.HumanoidRootPart.Position)
+                    pcall(function()
+                        if player:DistanceFromCharacter(currentEnemy.HumanoidRootPart.Position) < 10 then
+                            for i = 1, 4 do
+                                game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Light Punch", true, false)
+                            end
+                            game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Kick", true, false)
+                            local PlayerName = player.Name
+                            local abilityPath = game:GetService("Workspace"):FindFirstChild(PlayerName).Scripts.Controls.Abilities
+                            for _, abilityName in ipairs(abilities) do
+                                if abilityPath:FindFirstChild(abilityName) then
+                                    game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer(abilityName, true, false)
+                                end
+                            end
+                        end
+                    end)
+                end
+                killCountValue.Value = killCountValue.Value + 1
+
+                if killCountValue.Value < maxKills then
+                    task.wait(0.25)
+                end
+            else
+                humanoidRootPart.CFrame = initialPosition
+                game:GetService("Players").LocalPlayer.Backpack.Events.HotkeyEvent:FireServer("Reset Character", true, false)
+                return
+            end
+        end
+    end
+end
+
+-- Создание вкладки для автофарма
+local enemyTab = Window:MakeTab({
+    Name = "Автофарм",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local enemySection = enemyTab:AddSection({
+    Name = "Функции автофарма"
+})
+
+-- Добавление переключателя для включения/выключения автофарма
+enemySection:AddToggle({
+    Name = "Включить авто фарм",
+    Default = false,
+    Callback = function(value)
+        isEnabled = value
+        if value then
+            initialPosition = humanoidRootPart.CFrame
+            spawn(autoFarm)
+        end
+    end
+})
+
+-- Добавление выпадающего списка врагов
+local enemyDropdown = enemySection:AddDropdown({
+    Name = "Выбрать врага",
+    Default = "",
+    Options = {},
+    Callback = function(value)
+        selectedEnemy = value
+    end
+})
+
+-- Начальное обновление списка врагов
+updateEnemyDropdown(enemyDropdown)
+
+-- Обновление списка врагов при добавлении/удалении NPC
+hostileNPCsFolder.ChildAdded:Connect(function()
+    updateEnemyDropdown(enemyDropdown)
+end)
+
+hostileNPCsFolder.ChildRemoved:Connect(function()
+    updateEnemyDropdown(enemyDropdown)
+end)
+
+-- Добавление кнопки для ручного обновления списка врагов
+enemySection:AddButton({
+    Name = "Обновить список врагов",
+    Callback = function()
+        updateEnemyDropdown(enemyDropdown)
+    end
+})
+
+-- Добавление текстового поля для установки максимального количества убийств
+enemySection:AddTextbox({
+    Name = "Установить максимальное количество убийств",
+    Default = "10",
+    TextDisappear = true,
+    Callback = function(value)
+        maxKills = tonumber(value) or 10
+    end
+})
+
+-- Добавление переключателя для включения/выключения возвращения на исходную позицию
+enemySection:AddToggle({
+    Name = "Включить возвращение на исходную позицию",
+    Default = true,
+    Callback = function(value)
+        isReturnEnabled = value
+    end
+})
+
+-- Добавление кнопки для ручного возврата на исходную позицию
+enemySection:AddButton({
+    Name = "Ручной возврат на исходную позицию",
+    Callback = function()
+        humanoidRootPart.CFrame = initialPosition
+    end
+})
+
+local Tab = Window:MakeTab({
+    Name = "Полезное",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "Надо"
+})
+
+local PlayerName = game:GetService("Players").LocalPlayer.Name
+local aboba = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics:GetAttribute("SprintSpeed")
+Tab:AddSlider({
+	Name = "Speed",
+	Min = aboba,
+	Max = aboba * 10,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(Speed)
+		game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics:SetAttribute("SprintSpeed", Speed)
+	end    
+})
+
+Tab:AddButton({
+	Name = "Dark Dex V4",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/HackerMan33106/DarkDex/main/DarkDex-V4", true))()
+  	end    
+})
+
+-- Сервис игроков и workspace
+local playerService = game:GetService("Players")
+local workspace = game:GetService("Workspace")
+local localPlayer = playerService.LocalPlayer
+
+-- Функция для обновления списка игроков
+local function updateDropdown(dropdown)
+    local playerNames = {}
+    for _, player in pairs(playerService:GetPlayers()) do
+        if player ~= localPlayer then
+            table.insert(playerNames, player.Name)
+        end
+    end
+    
+    dropdown:Refresh(playerNames, true)
+end
+
+-- Создание выпадающего списка
+local dropdown = Section:AddDropdown({
+    Name = "Телепорт к игрокам",
+    Default = "",
+    Options = {},
+    Callback = function(selectedPlayer)
+        local targetPlayer = workspace:FindFirstChild(selectedPlayer)
+        if targetPlayer and targetPlayer:FindFirstChild("HumanoidRootPart") then
+            localPlayer.Character.HumanoidRootPart.CFrame = targetPlayer.HumanoidRootPart.CFrame
+        else
+            OrionLib:MakeNotification({
+                Name = "Ошибка",
+                Content = "Не удалось найти игрока или его HumanoidRootPart в Workspace",
+                Image = "rbxassetid://4483345998",
+                Time = 3
+            })
+        end
+    end
+})
+
+-- Обновление списка игроков при подключении или отключении игрока
+playerService.PlayerAdded:Connect(function()
+    updateDropdown(dropdown)
+end)
+
+playerService.PlayerRemoving:Connect(function()
+    updateDropdown(dropdown)
+end)
+
+-- Начальное обновление списка игроков
+updateDropdown(dropdown)
+
+local Tab = Window:MakeTab({
+	Name = "Secret",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Dupe"
+})
+
+Tab:AddButton({
+	Name = "Auto lvl and money",
+	Callback = function()
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
+        local A_1 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective1, 
+            [2] = 1, 
+            [3] = 1
+        }
+        local A_2 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective2, 
+            [2] = 2, 
+            [3] = 1
+        }
+        local A_3 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.RisottoBrunoQuest.Objective3, 
+            [2] = 3, 
+            [3] = 1
+        }
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_1)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_2)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_3)
+  	end
+})
+
+local Tab = Window:MakeTab({
+	Name = "Сюжетка",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Авто(Кликать)"
+})
+
+Tab:AddButton({
+	Name = "Авто-Сюжетка",
+	Callback = function()
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "Start")
+        local A_1 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective1, 
+            [2] = 1, 
+            [3] = 1
+        }
+        local A_2 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective2, 
+            [2] = 2, 
+            [3] = 1
+        }
+        local A_3 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective3, 
+            [2] = 3, 
+            [3] = 1
+        }
+        local A_4 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective4, 
+            [2] = 4, 
+            [3] = 1
+        }
+        local A_5 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective5, 
+            [2] = 5, 
+            [3] = 1
+        }
+        local A_6 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective6,
+            [2] = 6,
+            [3] = 1
+        }
+        local A_7 = 
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective7,
+            [2] = 7,
+            [3] = 1
+        }
+        local A_8 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective8,
+            [2] = 8,
+            [3] = 1
+        }
+        local A_9 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective9,
+            [2] = 9,
+            [3] = 1
+        }
+        local A_10 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective10,
+            [2] = 10,
+            [3] = 1
+        }
+        local A_11 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective11,
+            [2] = 11,
+            [3] = 1
+        }
+        local A_12 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective12,
+            [2] = 12,
+            [3] = 1
+        }
+        local A_13 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective13,
+            [2] = 13,
+            [3] = 1
+        }
+        local A_14 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective14,
+            [2] = 14,
+            [3] = 1
+        }
+        local A_15 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective15,
+            [2] = 15,
+            [3] = 1
+        }
+        local A_16 =
+        {
+            [1] = game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.MainQuest.Objective16,
+            [2] = 16,
+            [3] = 1
+        }
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_1)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_2)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_3)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_4)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_5)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_6)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_7)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_8)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_9)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_10)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_11)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_12)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_13)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_14)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_15)
+        game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("MainQuest", "AddProgress", A_16)
+  	end    
+})
+
+local Tab = Window:MakeTab({
+    Name = "Сундуки",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Автофарм"
+})
+
+local running = false
+
+local function pressE()
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+    VirtualInputManager:SendKeyEvent(true, "E", false, game)
+    wait(0.15)
+    VirtualInputManager:SendKeyEvent(false, "E", false, game)
+end
+
+local function interactWithChest(chest)
+    local FX = chest:FindFirstChild("FX")
+    local WoodTop = chest:FindFirstChild("WoodTop")
+    if FX and WoodTop then
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local proximityPrompt = WoodTop:FindFirstChild("ProximityPrompt")
+            if proximityPrompt then
+                local isOpen = not proximityPrompt.Enabled
+                if not isOpen then
+                    proximityPrompt.HoldDuration = 0.01
+                    proximityPrompt.RequiresLineOfSight = false
+                    player.Character.HumanoidRootPart.CFrame = FX.CFrame * CFrame.new(0, 2, 0)
+                    wait(0.1)
+                    pressE()
+                end
+            end
+        end
+    end
+end
+
+local function teleportToAllChests()
+    local chestFolder = game:GetService("Workspace"):FindFirstChild("Chests")
+    if not chestFolder then
+        OrionLib:MakeNotification({
+            Name = "Ошибка",
+            Content = "Папка Chests не найдена в Workspace",
+            Image = "rbxassetid://4483345998",
+            Time = 3
+        })
+        return
+    end
+
+    local spawnedChests = chestFolder:FindFirstChild("SpawnedChests")
+    if not spawnedChests then
+        OrionLib:MakeNotification({
+            Name = "Ошибка",
+            Content = "Папка SpawnedChests не найдена в Chests",
+            Image = "rbxassetid://4483345998",
+            Time = 3
+        })
+        return
+    end
+
+    while running do
+        for _, chest in ipairs(spawnedChests:GetChildren()) do
+            interactWithChest(chest)
+            if not running then break end
+        end
+        wait(0.5)
+    end
+end
+
+local function enableChestAutoFarm()
+    running = true
+    teleportToAllChests()
+end
+
+local function disableChestAutoFarm()
+    running = false
+end
+
+-- Создание переключателя для авто фарма сундуков
+Section:AddToggle({
+    Name = "Авто фарм сундуков",
+    Default = false,
+    Callback = function(caf)
+        if caf then
+            enableChestAutoFarm()
+        else
+            disableChestAutoFarm()
+        end
+    end
+})
+
+-- Создание вкладки
+local Tab = Window:MakeTab({
+    Name = "Инвентарь",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Создание секции
+local Section = Tab:AddSection({
+    Name = "Управление предметами"
+})
+
+-- Переменная для хранения значения
+local Value = 1
+
+-- Создание текстового поля
+Section:AddTextbox({
+    Name = "Введите число",
+    Default = "1",
+    TextDisappear = true,
+    Callback = function(V)
+        Value = tonumber(V) or 1  -- Преобразуем введенное значение в число
+    end
+})
+
+-- Игнорируемые атрибуты
+local ignoreAttributes = {
+    ClassName = true,
+    Name = true,
+    Parent = true,
+    Archivable = true
+}
+
+-- Имя игрока
+local PlayerName = game.Players.LocalPlayer.Name
+
+-- Поиск инвентаря игрока
+local Inventory = workspace:FindFirstChild(PlayerName).PlayerStatistics:FindFirstChild("Inventory")
+
+-- Функция для создания кнопок
+local function createButtons(increase)
+    if Inventory then
+        local attributes = {}
+
+        -- Собираем атрибуты инвентаря
+        for attributeName, attributeValue in pairs(Inventory:GetAttributes()) do
+            if not ignoreAttributes[attributeName] then
+                table.insert(attributes, {name = attributeName, value = attributeValue})
+            end
+        end
+
+        -- Сортируем атрибуты по имени
+        table.sort(attributes, function(a, b)
+            return a.name < b.name
+        end)
+
+        -- Создаем кнопки для каждого атрибута
+        for _, attribute in ipairs(attributes) do
+            local buttonText = increase and "Выдать предмет: " .. attribute.name or "Убрать предмет: " .. attribute.name
+            Section:AddButton({
+                Name = buttonText,
+                Callback = function()
+                    local currentCount = Inventory:GetAttribute(attribute.name) or 0
+                    Inventory:SetAttribute(attribute.name, currentCount + (increase and Value or -Value))
+                end
+            })
+        end
+    else
+        Section:AddLabel("У папки 'Inventory' было изменено название или её местонахождение.")
+    end
+end
+
+-- Создание кнопок для добавления предметов
+createButtons(true)
+
+-- Создание кнопок для удаления предметов
+createButtons(false)  
