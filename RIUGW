@@ -685,7 +685,132 @@ Section:AddButton({
     end
 })
 
+local Section = Tab:AddSection({
+	Name = "Skins"
+})
 
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({
+    Name = "AutoFarm Skins",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "AutoFarmConfig"
+})
+
+local selectedSkin
+local skinCheckInterval = 5 -- интервал проверки скина в секундах
+local autoFarmRunning = false
+
+local skins = {
+    "Black Sabbath (Alternate 2)", "Black Sabbath (Alternate)", "Black Sabbath (Default)", 
+    "Crazy Amethyst", "Crazy Diamond (Default)", "Crazy Gold", "Crazy Minion", 
+    "Plague Doctor", "Gold Experience (Alternate)", "Gold Experience (Cracked)", 
+    "Gold Experience (Default)", "Gold Experience (Manga)", "Hermit Black", 
+    "Hermit Blue", "Hermit Green", "Hermit Purple (Default)", "Hermit Red", "Garfield", 
+    "Killer Queen (Alternate)", "Killer Queen (Default)", "Killer Queen (Deimos)", 
+    "Killer Queen (Gold)", "Neco-Arc", "Neco-Arc Chaos", "Neco-Arc Classic", 
+    "Shadow Killer Queen", "Awakened EVA-01", "EVA-01", "Jack Skellington (Christmas)", 
+    "Ghostface", "Jack Skellington (Halloween)", "King Corruption", "King Crimson (Amethyst)", 
+    "King Crimson (Default)", "King Crimson (Deimos)", "King Crimson (Manga)", 
+    "King Crimson (Monochromatic)", "Minos Prime", "Slender Man", "The Honored One", 
+    "The Strongest", "The Strongest (Alternate)", "The Strongest (Final)", 
+    "Metallica (Default)", "Golden Chariot", "Jack The Ripper", "Jetstream Sam", 
+    "Silver Chariot (Default)", "Silver Chariot (OVA)", "Attack Titan", 
+    "Christmas Spirit", "Ghost of Sparta", "Molten Star Platinum", "Saitama", 
+    "Senator Armstrong", "Star Flat-inum", "Star Platinum (Default)", "Star Platinum (Gold)", 
+    "Star Platinum (HFTF)", "Star Platinum (Manga)", "Star Platinum (OVA 2)", 
+    "Star Platinum (OVA)", "Toxic Star Platinum", "Volcanic Star Platinum", 
+    "Sticky Fingers (Alternate)", "Sticky Fingers (Default)", "Sticky Fingers (EOH)", 
+    "The Puppet", "Amethyst The World", "Demonic The World", "Holy Diver", 
+    "Molten The World", "Moon Shadow The World", "Phantasm The World", 
+    "Shadow The World", "Sun Shadow The World", "The World (Alternate)", 
+    "The World (Alternate 2)", "The World (Anniversary)", "The World (Manga)", 
+    "The World (OVA)", "The World (Time Stop)", "Elfsnake", "Reaper", 
+    "Whitesnake (Alternate)", "Whitesnake (Default)", "Whitesnake (Gold)"
+}
+
+local Tab = Window:MakeTab({
+    Name = "AutoFarm Settings",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+Tab:AddDropdown({
+    Name = "Select Skin",
+    Default = skins[1],
+    Options = skins,
+    Callback = function(Value)
+        selectedSkin = Value
+    end
+})
+
+Tab:AddToggle({
+    Name = "Start AutoFarm",
+    Default = false,
+    Callback = function(Value)
+        autoFarmRunning = Value
+        if autoFarmRunning then
+            OrionLib:MakeNotification({
+                Name = "AutoFarm Started",
+                Content = "AutoFarm has started.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+            StartAutoFarm()
+        else
+            OrionLib:MakeNotification({
+                Name = "AutoFarm Stopped",
+                Content = "AutoFarm has stopped.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+function StartAutoFarm()
+    spawn(function()
+        while autoFarmRunning do
+            local player = game:GetService("Players").LocalPlayer
+            local standSkin = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics:GetAttribute("StandSkin")
+            local notification = player.PlayerGui:FindFirstChild("NotificationGui") -- Проверка на уведомление
+
+            if notification and notification.TextLabel.Text:find("You Obtained") then
+                OrionLib:MakeNotification({
+                    Name = "AutoFarm Stopped",
+                    Content = "AutoFarm has stopped due to obtaining a skin.",
+                    Image = "rbxassetid://4483345998",
+                    Time = 5
+                })
+                autoFarmRunning = false
+            elseif standSkin == selectedSkin then
+                OrionLib:MakeNotification({
+                    Name = "Target Skin Acquired",
+                    Content = "You have obtained the desired skin: " .. selectedSkin,
+                    Image = "rbxassetid://4483345998",
+                    Time = 5
+                })
+                autoFarmRunning = false
+            else
+                if standSkin then
+                    -- Убираем стенд, если есть текущий
+                    local A_1 = game:GetService("Workspace"):FindFirstChild(player.Name)
+                    local A_2 = "Remove Stand"
+                    local Event = game:GetService("ReplicatedStorage").Events.InteractEvent
+                    Event:FireServer(A_1, A_2, nil, 2)
+                end
+                -- Используем стрелу
+                local A_1 = game:GetService("Workspace"):FindFirstChild(player.Name)
+                local A_2 = "Arrow"
+                local Event = game:GetService("ReplicatedStorage").Events.ItemUseEvent
+                Event:FireServer(A_1, A_2, nil, "Use")
+            end
+
+            wait(skinCheckInterval)
+        end
+    end)
+end
 
 local Tab = Window:MakeTab({
     Name = "Usefull",
