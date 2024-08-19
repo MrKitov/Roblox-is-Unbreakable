@@ -5,5 +5,5 @@ elseif game.PlaceId == 8893338477 then
 elseif game.PlaceId == 10533515391 then
    loadstring(game:HttpGet("https://raw.githubusercontent.com/HackerMan33106/main/main/ru-translate/StardustRebornRu.lua"))()
 else
-   game.Players.LocalPlayer:Kick("Этот режим не поддерживается.")
+   game.Players.LocalPlayer:Kick("This experience is not supported.")
 end
