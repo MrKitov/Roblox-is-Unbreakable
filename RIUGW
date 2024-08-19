@@ -721,12 +721,6 @@ local skins = {
     "Whitesnake (Alternate)", "Whitesnake (Default)", "Whitesnake (Gold)"
 }
 
-local Tab = Window:MakeTab({
-    Name = "AutoFarm Settings",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
 Tab:AddDropdown({
     Name = "Select Skin",
     Default = skins[1],
