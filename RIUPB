@@ -1012,7 +1012,7 @@ Tab:AddButton({
 	Callback = function()
 		local PlayerName = game:GetService("Players").LocalPlayer.Name
 		
-		for i = 1, 25 do
+		for i = 1, 100 do
 			game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
 
 			local A_1 = {
