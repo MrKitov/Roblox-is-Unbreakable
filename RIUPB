@@ -653,6 +653,46 @@ function StartAutoFarm()
             local player = game:GetService("Players").LocalPlayer
             local standSkin = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics:GetAttribute("StandSkin")
             local notification = player.PlayerGui:FindFirstChild("NotificationGui") -- Проверка на уведомление
+            local arrowCount = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Inventory:GetAttribute("Arrow")
+            local playerCash = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics:GetAttribute("Cash")
+
+            -- Проверка на количество стрел и денег
+            if arrowCount == 0 then
+                if playerCash <= 10000 then
+                    -- Выполнение квеста для получения денег
+                    for i = 1, 25 do
+                        game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
+
+                        local A_1 = {
+                            [1] = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.RisottoBrunoQuest.Objective1, 
+                            [2] = 1, 
+                            [3] = 1
+                        }
+
+                        local A_2 = {
+                            [1] = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.RisottoBrunoQuest.Objective2, 
+                            [2] = 2, 
+                            [3] = 1
+                        }
+
+                        local A_3 = {
+                            [1] = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.RisottoBrunoQuest.Objective3, 
+                            [2] = 3, 
+                            [3] = 1
+                        }
+
+                        game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_1)
+                        game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_2)
+                        game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "AddProgress", A_3)
+                    end
+                end
+                -- Покупка стрелы на 240000 денег
+                local A_1 = game:GetService("Workspace"):FindFirstChild(player.Name)
+                local A_2 = "Arrow"
+                local A_3 = 1
+                local Event = game:GetService("ReplicatedStorage").Events.ItemBuyEvent
+                Event:FireServer(A_1, A_2, A_3)
+            end
 
             if notification and notification.TextLabel.Text:find("You Obtained") then
                 OrionLib:MakeNotification({
@@ -689,6 +729,7 @@ function StartAutoFarm()
         end
     end)
 end
+
 
 local Tab = Window:MakeTab({
     Name = "Useful",
