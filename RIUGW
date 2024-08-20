@@ -765,9 +765,9 @@ function StartAutoFarm()
 
             -- Проверка на количество стрел и денег
             if arrowCount == 0 then
-                if playerCash <= 10000 then
+                if playerCash <= 11000 then
                     -- Выполнение квеста для получения денег
-                    for i = 1, 25 do
+                    for i = 1, 100 do
                         game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
 
                         local A_1 = {
