@@ -83,27 +83,23 @@ Section:AddDropdown({
     Default = "",
     Options = {"Stone Mask(10000$)", "Steel Ball(8000$)", "Arrow(15000$)", "Locacaca(100000$)", "Requiem Arrow(200000$)"},
     Callback = function(IBuy)
-        PlayerName = game:GetService("Players").LocalPlayer.Name
-        if IBuy == "Каменная маска(10000$)" then
+        local PlayerName = game:GetService("Players").LocalPlayer.Name
+        local item
+        if IBuy == "Stone Mask(10000$)" then
             item = "StoneMask"
-        elseif IBuy == "Стальной шар(8000$)" then
+        elseif IBuy == "Steel Ball(8000$)" then
             item = "SteelBall"
-        elseif IBuy == "Стрела(15000$)" then
+        elseif IBuy == "Arrow(15000$)" then
             item = "Arrow"
-        elseif IBuy == "Локакака(100000$)" then
+        elseif IBuy == "Locacaca(100000$)" then
             item = "Locacaca"
-        elseif IBuy == "Реквием стрела(200000$)" then
+        elseif IBuy == "Requiem Arrow(200000$)" then
             item = "RequiemArrow"
         end
+        game:GetService("ReplicatedStorage").Events.ItemBuyEvent:FireServer(game:GetService("Workspace"):FindFirstChild(PlayerName), item, amount)
     end
 })
 
-Tab:AddButton({
-	Name = "Buying an item",
-	Callback = function()
-        game:GetService("ReplicatedStorage").Events.ItemBuyEvent:FireServer(game:GetService("Workspace"):FindFirstChild(PlayerName), item, amount)
-  	end    
-})
 
 local Tab = Window:MakeTab({
 	Name = "Teleports",
@@ -1012,7 +1008,7 @@ Tab:AddButton({
 	Callback = function()
 		local PlayerName = game:GetService("Players").LocalPlayer.Name
 		
-		for i = 1, 100 do
+		for i = 1, 25 do
 			game:GetService("Workspace"):FindFirstChild(PlayerName).PlayerStatistics.Quests.QuestUpdateEvent:FireServer("RisottoBrunoQuest", "Start")
 
 			local A_1 = {
