@@ -610,7 +610,7 @@ local skins = {
     "Molten The World", "Moon Shadow The World", "Phantasm The World", 
     "Shadow The World", "Sun Shadow The World", "The World (Alternate)", 
     "The World (Alternate 2)", "The World (Anniversary)", "The World (Manga)", 
-    "The World (OVA)", "The World (Time Stop)", "Elfsnake", "Reaper", 
+    "The World (OVA)", "The World (Time Stop)", "The World (Default)", "Elfsnake", "Reaper", 
     "Whitesnake (Alternate)", "Whitesnake (Default)", "Whitesnake (Gold)"
 }
 
@@ -723,6 +723,18 @@ function StartAutoFarm()
                 local A_2 = "Arrow"
                 local Event = game:GetService("ReplicatedStorage").Events.ItemUseEvent
                 Event:FireServer(A_1, A_2, nil, "Use")
+
+                -- Проверка и уведомление о выпавшем скине
+                wait(5) -- Ждём, чтобы дать время на обновление скина
+                local newSkin = game:GetService("Workspace"):FindFirstChild(player.Name).PlayerStatistics:GetAttribute("StandSkin")
+                if newSkin and table.find(skins, newSkin) then
+                    OrionLib:MakeNotification({
+                        Name = "New Skin Acquired",
+                        Content = "You have obtained a new skin: " .. newSkin,
+                        Image = "rbxassetid://4483345998",
+                        Time = 5
+                    })
+                end
             end
 
             wait(skinCheckInterval)
