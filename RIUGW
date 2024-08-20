@@ -991,6 +991,29 @@ Tab:AddButton({
 	end
 })
 
+-- Переменная для отслеживания состояния автоматического удаления
+local autoDeleteEnabled = false
+
+-- Функция для удаления меню квеста
+local function DeleteQuestMenu()
+    game:GetService("Players").LocalPlayer.PlayerGui.HUD.Screen.ChildAdded:Connect(function(child)
+        if child.Name == "QuestCompleteGUI_RisottoBrunoQuest" and autoDeleteEnabled then
+            child:Destroy()
+            print("Quest menu destroyed!")
+        end
+    end)
+end
+
+-- Добавляем кнопку для включения автоматического удаления меню
+Tab:AddButton({
+    Name = "Turn on destroy quest menu",
+    Callback = function()
+        autoDeleteEnabled = true
+        DeleteQuestMenu()
+        print("Menu destroyed turn on.")
+    end    
+})
+
 
 local Tab = Window:MakeTab({
 	Name = "Auto Story",
