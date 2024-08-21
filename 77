@@ -386,3 +386,52 @@ Section:AddButton({
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-630.414795, 89.1204224, -1713.42688, 0.160253763, 0, 0.987075865, 0, 1, 0, -0.987075865, 0, 0.160253763)
     end
 })
+
+-- Сервис игроков и workspace
+local playerService = game:GetService("Players")
+local workspace = game:GetService("Workspace")
+local localPlayer = playerService.LocalPlayer
+
+-- Функция для обновления списка игроков
+local function updateDropdown(dropdown)
+    local playerNames = {}
+    for _, player in pairs(playerService:GetPlayers()) do
+        if player ~= localPlayer then
+            table.insert(playerNames, player.Name)
+        end
+    end
+    
+    dropdown:Refresh(playerNames, true)
+end
+
+-- Создание выпадающего списка
+local dropdown = Section:AddDropdown({
+    Name = "Teleport to the player",
+    Default = "",
+    Options = {},
+    Callback = function(selectedPlayer)
+        local targetPlayer = workspace:FindFirstChild(selectedPlayer)
+        if targetPlayer and targetPlayer:FindFirstChild("HumanoidRootPart") then
+            localPlayer.Character.HumanoidRootPart.CFrame = targetPlayer.HumanoidRootPart.CFrame
+        else
+            OrionLib:MakeNotification({
+                Name = "Ошибка",
+                Content = "Не удалось найти игрока или его HumanoidRootPart в Workspace",
+                Image = "rbxassetid://4483345998",
+                Time = 3
+            })
+        end
+    end
+})
+
+-- Обновление списка игроков при подключении или отключении игрока
+playerService.PlayerAdded:Connect(function()
+    updateDropdown(dropdown)
+end)
+
+playerService.PlayerRemoving:Connect(function()
+    updateDropdown(dropdown)
+end)
+
+-- Начальное обновление списка игроков
+updateDropdown(dropdown)
