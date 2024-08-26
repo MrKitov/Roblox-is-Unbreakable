@@ -1,9 +1,9 @@
 if game.PlaceId == 8578977731 then
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/MrKitov/Roblox-is-Unbreakable/main/RIUPB", true))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/MrKitov/Roblox-is-Unbreakable/main/PB", true))()
 elseif game.PlaceId == 8893338477 then
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/MrKitov/Roblox-is-Unbreakable/main/RIUGW", true))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/MrKitov/Roblox-is-Unbreakable/main/GW", true))()
 elseif game.PlaceId == 13463666217 then
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/MrKitov/Roblox-is-Unbreakable/main/77", true))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/MrKitov/Roblox-is-Unbreakable/main/Rings", true))()
 else
    game.Players.LocalPlayer:Kick("This experience is not supported.")
 end
